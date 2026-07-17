@@ -1,0 +1,194 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Phuket9 — Investment Portal Demo</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{--bg:#0a1420;--bg2:#0f1d2e;--panel:#132436;--panel2:#18314a;--line:#22405c;--ink:#eaf2fb;--sub:#8fa6bd;
+--emer:#1fc08a;--emer2:#54e0af;--gold:#d4af6a;--gold2:#eccf94;--red:#e0607a}
+body{background:#060d16;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);padding:22px 14px 46px;display:flex;flex-direction:column;align-items:center;gap:14px}
+.cap{text-align:center;max-width:600px}
+.cap h1{font-size:19px}.cap h1 span{color:var(--gold2)}
+.cap p{color:#9fb2c6;font-size:12.5px;margin-top:5px;line-height:1.5}
+.cap .pill{display:inline-block;margin-top:9px;font-size:10px;letter-spacing:1.6px;text-transform:uppercase;color:#08131f;background:linear-gradient(90deg,var(--gold),var(--gold2));padding:5px 13px;border-radius:20px;font-weight:700}
+.browser{width:min(980px,97vw);background:var(--bg);border-radius:16px;overflow:hidden;box-shadow:0 30px 90px rgba(0,0,0,.6);border:1px solid #17293c}
+.chrome{background:#0d1b29;display:flex;align-items:center;gap:9px;padding:11px 14px;border-bottom:1px solid var(--line)}
+.dots{display:flex;gap:6px}.dots i{width:11px;height:11px;border-radius:50%;display:block}
+.addr{flex:1;background:#0a1622;border:1px solid var(--line);border-radius:9px;padding:6px 12px;font-size:11.5px;color:#6f869c;display:flex;gap:7px}
+.addr b{color:var(--gold2)}
+.site{background:var(--bg)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 26px;border-bottom:1px solid var(--line);background:var(--bg2)}
+.logo{display:flex;align-items:center;gap:9px;font-weight:800;font-size:16px;letter-spacing:.3px}
+.logo .m{width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,var(--gold),#a8813f);display:grid;place-items:center;color:#0a1420;font-size:16px;font-weight:800}
+.logo .m span{color:#0a1420}
+.navlinks{display:flex;gap:20px;font-size:12.5px;color:var(--sub)}.navlinks span:first-child{color:var(--gold2);font-weight:700}
+.cta{background:linear-gradient(135deg,var(--emer),#12a074);color:#04140d;padding:8px 15px;border-radius:10px;font-size:12.5px;font-weight:800}
+.hero{padding:24px 26px 6px}
+.hero .ey{color:var(--gold2);font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700}
+.hero h2{font-size:25px;margin-top:7px;line-height:1.15}.hero h2 span{color:var(--emer2)}
+.hero p{color:var(--sub);font-size:12.5px;margin-top:7px;max-width:560px}
+.wrap{display:grid;grid-template-columns:1fr 1.05fr;gap:18px;padding:20px 26px 6px}
+@media(max-width:780px){.wrap{grid-template-columns:1fr}}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px}
+.panel h3{font-size:14px;margin-bottom:3px}.panel .sub{font-size:11.5px;color:var(--sub);margin-bottom:16px}
+.field{margin-bottom:17px}
+.fl{display:flex;justify-content:space-between;font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--sub);margin-bottom:8px}
+.fl b{color:var(--gold2);font-size:14px;text-transform:none}
+input[type=range]{width:100%;accent-color:var(--emer)}
+.toggle{display:inline-flex;background:var(--bg);border:1px solid var(--line);border-radius:9px;overflow:hidden;margin-left:8px}
+.toggle button{background:none;border:none;color:var(--sub);padding:4px 11px;font-size:11px;cursor:pointer;font-weight:700}
+.toggle button.on{background:var(--emer);color:#04140d}
+/* results */
+.big{display:flex;gap:12px;margin-bottom:14px}
+.stat{flex:1;background:var(--panel2);border:1px solid var(--line);border-radius:13px;padding:13px}
+.stat .k{font-size:10.5px;color:var(--sub);text-transform:uppercase;letter-spacing:.5px}
+.stat .v{font-size:21px;font-weight:800;color:var(--emer2);margin-top:5px}
+.stat .v.g{color:var(--gold2)}
+.stat .s{font-size:10.5px;color:var(--sub);margin-top:3px}
+.chart{margin-top:6px;background:var(--bg2);border:1px solid var(--line);border-radius:13px;padding:14px}
+.chart .ct{font-size:11px;color:var(--sub);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px}
+.bars{display:flex;align-items:flex-end;gap:10px;height:110px}
+.bars .col{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end}
+.bars .bar{width:100%;border-radius:6px 6px 0 0;background:linear-gradient(180deg,var(--emer2),var(--emer));transition:height .5s ease;min-height:4px}
+.bars .yr{font-size:10px;color:var(--sub)}.bars .amt{font-size:9.5px;color:var(--gold2);font-weight:700}
+.lrs{margin-top:14px;background:var(--panel2);border:1px solid var(--line);border-radius:13px;padding:13px}
+.lrs .lt{display:flex;justify-content:space-between;font-size:11.5px;color:var(--sub);margin-bottom:8px}
+.lrs .lt b{color:var(--ink)}
+.lrstrack{height:8px;background:var(--bg);border-radius:6px;overflow:hidden}
+.lrsfill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));transition:width .5s}
+.lrs .note{font-size:10.5px;color:var(--sub);margin-top:8px}
+/* comparator */
+.comp-h{padding:8px 26px 2px;font-size:15px;font-weight:800}
+.comp{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:10px 26px 24px}
+@media(max-width:780px){.comp{grid-template-columns:1fr}}
+.prop{background:var(--panel);border:1px solid var(--line);border-radius:15px;overflow:hidden;position:relative}
+.prop.win{border-color:var(--emer);box-shadow:0 0 0 1px var(--emer)}
+.smart{position:absolute;top:12px;right:12px;background:var(--emer);color:#04140d;font-size:9.5px;font-weight:800;padding:4px 9px;border-radius:20px;letter-spacing:.5px}
+.prop .img{height:82px;background:linear-gradient(135deg,#16324a,#1d4160);display:grid;place-items:center;font-size:30px}
+.prop .pi{padding:13px 15px}
+.prop .nm{font-size:14px;font-weight:800}.prop .loc{font-size:11px;color:var(--sub);margin-top:2px}
+.prow{display:flex;justify-content:space-between;font-size:12px;padding:7px 0;border-bottom:1px solid var(--line)}
+.prow:last-child{border-bottom:none}.prow .l{color:var(--sub)}.prow .r{font-weight:700}.prow .r.good{color:var(--emer2)}
+.madeby{color:#5f7a92;font-size:11px}.madeby b{color:#8fa6bd}
+</style></head><body>
+<div class="cap">
+  <h1><span>Phuket9</span> — Live Web Portal Prototype</h1>
+  <p>The <b>ROI Simulator</b> at the heart of the portal. Move the sliders and watch monthly rent, yield and 5-year value update live — in ₹ and $ — with an LRS meter and a Smart Comparator. Logic before emotion.</p>
+  <span class="pill">Working demo · not slideware</span>
+</div>
+
+<div class="browser">
+  <div class="chrome"><div class="dots"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></div>
+    <div class="addr">🔒 <b>phuket9.com</b>/invest/roi-simulator</div></div>
+  <div class="site">
+    <div class="nav">
+      <div class="logo"><div class="m">9</div>Phuket9</div>
+      <div class="navlinks"><span>ROI Simulator</span><span>Properties</span><span>LRS Guide</span><span>Deal Room</span></div>
+      <div class="cta">Book a Consult</div>
+    </div>
+    <div class="hero">
+      <div class="ey">Institutional-Grade · Cross-Border</div>
+      <h2>Own property in Phuket. <span>Run the numbers first.</span></h2>
+      <p>Transparent, RBI-LRS-compliant real estate investing for Indians — as clear as buying in Pune.</p>
+    </div>
+    <div class="wrap">
+      <div class="panel">
+        <h3>Your Investment</h3>
+        <div class="sub">Adjust and see returns recalculate instantly.</div>
+        <div class="field"><div class="fl"><span>Property price</span><b id="invV">₹1.50 Cr</b></div>
+          <input id="inv" type="range" min="5000000" max="80000000" step="500000" value="15000000"></div>
+        <div class="field"><div class="fl"><span>Rental yield</span><b id="yldV">7.2%</b></div>
+          <input id="yld" type="range" min="30" max="110" step="1" value="72"></div>
+        <div class="field"><div class="fl"><span>Annual appreciation</span><b id="appV">6.0%</b></div>
+          <input id="app" type="range" min="10" max="140" step="1" value="60"></div>
+        <div class="field"><div class="fl"><span>Holding period</span><b id="yrV">5 yrs</b></div>
+          <input id="yr" type="range" min="1" max="10" step="1" value="5"></div>
+        <div class="fl" style="margin-top:4px">Show amounts in
+          <span class="toggle" id="cur"><button class="on" data-c="INR">₹ INR</button><button data-c="USD">$ USD</button></span></div>
+      </div>
+      <div class="panel">
+        <h3>Projected Returns</h3>
+        <div class="sub" id="curEcho">Displayed in Indian Rupees · 1 USD ≈ ₹86</div>
+        <div class="big">
+          <div class="stat"><div class="k">Monthly rent</div><div class="v" id="mRent">₹90,000</div><div class="s" id="mRent2">$1,047 / month</div></div>
+          <div class="stat"><div class="k">Annual income</div><div class="v" id="aRent">₹10.8 L</div><div class="s" id="aRent2">$12,558 / year</div></div>
+        </div>
+        <div class="big">
+          <div class="stat"><div class="k">Value after <span id="yrEcho">5</span> yrs</div><div class="v g" id="fVal">₹2.01 Cr</div><div class="s">incl. appreciation</div></div>
+          <div class="stat"><div class="k">Total return</div><div class="v g" id="tRet">₹1.05 Cr</div><div class="s" id="tRetPct">+70% over period</div></div>
+        </div>
+        <div class="chart"><div class="ct">Projected property value</div>
+          <div class="bars" id="bars"></div></div>
+      </div>
+    </div>
+    <div class="wrap" style="padding-top:0">
+      <div class="panel" style="grid-column:1/-1">
+        <div class="lrs"><div class="lt"><span>LRS usage this year <b>($250,000 annual limit)</b></span><b id="lrsPct">—</b></div>
+          <div class="lrstrack"><div class="lrsfill" id="lrsFill" style="width:20%"></div></div>
+          <div class="note" id="lrsNote">This investment uses part of your Reserve Bank LRS allowance. The portal auto-checks compliance and generates the A2 form guide.</div></div>
+      </div>
+    </div>
+    <div class="comp-h">Smart Comparator — the engine picks the smarter buy</div>
+    <div class="comp">
+      <div class="prop win"><span class="smart">✓ SMART CHOICE</span><div class="img">🏖️</div>
+        <div class="pi"><div class="nm">The Phenomenon</div><div class="loc">Bang Tao · Sea view · Ready 2026</div>
+          <div class="prow"><span class="l">Price</span><span class="r">₹1.42 Cr</span></div>
+          <div class="prow"><span class="l">Rental yield</span><span class="r good">7.6%</span></div>
+          <div class="prow"><span class="l">Price / sq ft</span><span class="r good">₹18,900</span></div>
+          <div class="prow"><span class="l">Legal status</span><span class="r good">Freehold · clear title</span></div></div></div>
+      <div class="prop"><div class="img">🌴</div>
+        <div class="pi"><div class="nm">Wekata Residences</div><div class="loc">Kata · Hillside · Ready 2027</div>
+          <div class="prow"><span class="l">Price</span><span class="r">₹1.28 Cr</span></div>
+          <div class="prow"><span class="l">Rental yield</span><span class="r">6.1%</span></div>
+          <div class="prow"><span class="l">Price / sq ft</span><span class="r">₹20,400</span></div>
+          <div class="prow"><span class="l">Legal status</span><span class="r">Leasehold · 30 yr</span></div></div></div>
+    </div>
+  </div>
+</div>
+<div class="madeby">Prototype built for the client walkthrough · <b>Nivaran Technologies</b></div>
+
+<script>
+const RATE=86;
+const S={inv:15000000,yld:72,app:60,yr:5,cur:'INR'};
+function inr(n){ if(n>=10000000)return '₹'+(n/10000000).toFixed(2)+' Cr'; if(n>=100000)return '₹'+(n/100000).toFixed(2)+' L'; return '₹'+Math.round(n).toLocaleString('en-IN');}
+function usd(n){const v=n/RATE; if(v>=1000000)return '$'+(v/1000000).toFixed(2)+'M'; return '$'+Math.round(v).toLocaleString('en-US');}
+function money(n){return S.cur==='INR'?inr(n):usd(n);}
+function bindRange(id,key,fmt){const el=document.getElementById(id);el.oninput=()=>{S[key]=+el.value;render();};}
+bindRange('inv','inv');bindRange('yld','yld');bindRange('app','app');bindRange('yr','yr');
+document.querySelectorAll('#cur button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#cur button').forEach(x=>x.classList.remove('on'));b.classList.add('on');S.cur=b.dataset.c;render();});
+function render(){
+ const price=S.inv, yld=S.yld/10, app=S.app/10, yr=S.yr;
+ const annual=price*yld/100, monthly=annual/12;
+ const fval=price*Math.pow(1+app/100,yr);
+ const totalRent=annual*yr;
+ const totalReturn=(fval-price)+totalRent;
+ const pct=Math.round(totalReturn/price*100);
+ document.getElementById('invV').textContent=inr(price);
+ document.getElementById('yldV').textContent=yld.toFixed(1)+'%';
+ document.getElementById('appV').textContent=app.toFixed(1)+'%';
+ document.getElementById('yrV').textContent=yr+' yrs';
+ document.getElementById('yrEcho').textContent=yr;
+ document.getElementById('curEcho').textContent=S.cur==='INR'?'Displayed in Indian Rupees · 1 USD ≈ ₹86':'Displayed in US Dollars · 1 USD ≈ ₹86';
+ document.getElementById('mRent').textContent=money(monthly);
+ document.getElementById('mRent2').textContent=(S.cur==='INR'?usd(monthly):inr(monthly))+' / month';
+ document.getElementById('aRent').textContent=money(annual);
+ document.getElementById('aRent2').textContent=(S.cur==='INR'?usd(annual):inr(annual))+' / year';
+ document.getElementById('fVal').textContent=money(fval);
+ document.getElementById('tRet').textContent=money(totalReturn);
+ document.getElementById('tRetPct').textContent='+'+pct+'% over period';
+ // chart
+ let bars='';const maxV=price*Math.pow(1+app/100,yr);
+ const pts=[0,Math.ceil(yr/2),yr];
+ for(let i=0;i<=yr;i++){const v=price*Math.pow(1+app/100,i);const h=Math.max(6,v/maxV*100);
+   const show=(i===0||i===yr||i===Math.round(yr/2));
+   bars+=`<div class="col"><span class="amt">${show?money(v):''}</span><div class="bar" style="height:${h}%"></div><span class="yr">Y${i}</span></div>`;}
+ document.getElementById('bars').innerHTML=bars;
+ // LRS
+ const usdInv=price/RATE; const lrspct=Math.min(100,Math.round(usdInv/250000*100));
+ document.getElementById('lrsFill').style.width=lrspct+'%';
+ document.getElementById('lrsPct').textContent=lrspct+'% used';
+ document.getElementById('lrsNote').textContent= usdInv>250000
+   ? `⚠ ${usd(price)} exceeds the $250k annual LRS limit — the portal suggests splitting across family members or two financial years.`
+   : `This uses ~${lrspct}% of your $250,000 LRS allowance. The portal auto-generates the RBI A2 form guide.`;
+}
+render();
+</script></body></html>

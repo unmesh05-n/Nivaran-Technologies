@@ -1,0 +1,179 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Swar Shakti — Impact Marketplace Demo</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{--ink:#2a1a2e;--sub:#7a6a80;--mag:#e5397f;--org:#ff7a3d;--gold:#f2b134;--pur:#8b3dd4;--teal:#17b3a3;
+--cream:#fff8f2;--card:#ffffff;--line:#f0e4da}
+body{background:#e9dfd6;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);padding:22px 14px 46px;display:flex;flex-direction:column;align-items:center;gap:14px}
+.cap{text-align:center;max-width:560px}.cap h1{font-size:19px}.cap h1 span{background:linear-gradient(90deg,var(--mag),var(--org));-webkit-background-clip:text;background-clip:text;color:transparent}
+.cap p{color:#6b5c72;font-size:12.5px;margin-top:5px;line-height:1.5}
+.cap .pill{display:inline-block;margin-top:9px;font-size:10px;letter-spacing:1.6px;text-transform:uppercase;color:#fff;background:linear-gradient(90deg,var(--mag),var(--org));padding:5px 13px;border-radius:20px;font-weight:700}
+/* browser frame */
+.browser{width:min(960px,97vw);background:var(--card);border-radius:16px;overflow:hidden;box-shadow:0 30px 80px rgba(60,20,50,.35);border:1px solid #e6d8cc}
+.chrome{background:#f3ebe2;display:flex;align-items:center;gap:9px;padding:11px 14px;border-bottom:1px solid var(--line)}
+.dots{display:flex;gap:6px}.dots i{width:11px;height:11px;border-radius:50%;display:block}
+.addr{flex:1;background:#fff;border:1px solid var(--line);border-radius:9px;padding:6px 12px;font-size:11.5px;color:#9a8a95;display:flex;align-items:center;gap:7px}
+.addr b{color:var(--mag)}
+.site{background:var(--cream)}
+/* nav */
+.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 26px;border-bottom:1px solid var(--line);background:#fff}
+.logo{display:flex;align-items:center;gap:9px;font-weight:800;font-size:16px}
+.logo .m{width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,var(--mag),var(--org));display:grid;place-items:center;color:#fff;font-size:17px}
+.navlinks{display:flex;gap:20px;font-size:12.5px;color:var(--sub)}.navlinks span:first-child{color:var(--mag);font-weight:700}
+.book{background:linear-gradient(135deg,var(--mag),var(--org));color:#fff;padding:8px 15px;border-radius:10px;font-size:12.5px;font-weight:700}
+/* hero */
+.hero{padding:26px 26px 8px;text-align:center;background:radial-gradient(700px 240px at 50% -30%,rgba(229,57,127,.14),transparent)}
+.hero h2{font-size:26px;line-height:1.15}.hero h2 span{color:var(--mag)}
+.hero p{color:var(--sub);font-size:13px;margin-top:8px}
+/* main grid */
+.wrap{display:grid;grid-template-columns:1.15fr 1fr;gap:18px;padding:22px 26px 8px}
+@media(max-width:760px){.wrap{grid-template-columns:1fr}}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px}
+.panel h3{font-size:14px;margin-bottom:4px}.panel .hint{font-size:11.5px;color:var(--sub);margin-bottom:14px}
+.field{margin-bottom:15px}
+.flabel{font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--sub);margin-bottom:8px;display:flex;justify-content:space-between}
+.flabel b{color:var(--org);font-size:14px;text-transform:none}
+.presets{display:flex;gap:7px;flex-wrap:wrap}
+.pset{padding:8px 13px;border-radius:10px;border:1px solid var(--line);background:#fff;font-size:12.5px;color:var(--ink);cursor:pointer;transition:.15s}
+.pset.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+input[type=range]{width:100%;accent-color:var(--mag)}
+.cats{display:flex;gap:7px;flex-wrap:wrap}
+.cat{padding:8px 12px;border-radius:20px;border:1px solid var(--line);background:#fff;font-size:12px;cursor:pointer;color:var(--sub);transition:.15s}
+.cat.on{background:linear-gradient(135deg,rgba(229,57,127,.14),rgba(255,122,61,.1));border-color:var(--mag);color:var(--mag);font-weight:700}
+/* split */
+.splitbar{height:26px;border-radius:8px;overflow:hidden;display:flex;margin:6px 0 14px;box-shadow:inset 0 1px 3px rgba(0,0,0,.08)}
+.splitbar div{transition:width .5s ease;display:flex;align-items:center;justify-content:center;color:#fff;font-size:10.5px;font-weight:700}
+.sp-a{background:linear-gradient(135deg,var(--mag),#c22868)}.sp-n{background:linear-gradient(135deg,var(--org),#e5632a)}.sp-p{background:linear-gradient(135deg,var(--gold),#d99518);color:#5a3d00}
+.legend{display:flex;flex-direction:column;gap:9px}
+.lrow{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-radius:11px;background:#fdf7f1;border:1px solid var(--line)}
+.lrow .lft{display:flex;align-items:center;gap:9px}
+.sw{width:12px;height:12px;border-radius:4px}
+.lrow .who{font-size:12.5px;font-weight:700}.lrow .who small{display:block;font-weight:400;color:var(--sub);font-size:10.5px}
+.lrow .amt{font-weight:800;font-size:15px}
+.impact{margin-top:14px;background:linear-gradient(135deg,#2a1a2e,#4a2350);color:#fff;border-radius:14px;padding:15px}
+.impact .t{font-size:12px;color:#f3c;letter-spacing:.5px;text-transform:uppercase;color:#ffb3d0}
+.impact .big{font-size:13px;line-height:1.6;margin-top:6px}
+.impact .big b{color:var(--gold)}
+/* talent */
+.talent-h{padding:6px 26px 2px;font-size:15px;font-weight:800}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:10px 26px 22px}
+@media(max-width:760px){.grid{grid-template-columns:repeat(2,1fr)}}
+.tcard{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.tcard .ph{height:74px;display:grid;place-items:center;font-size:30px}
+.tcard .info{padding:9px 11px}
+.tcard .nm{font-size:12.5px;font-weight:700}.tcard .rl{font-size:10.5px;color:var(--sub);margin-top:1px}
+.tcard .foot{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
+.tcard .rt{font-size:10.5px;color:var(--gold);font-weight:700}.tcard .pr{font-size:11px;font-weight:800;color:var(--mag)}
+.tcard .ngo{font-size:9.5px;color:var(--teal);margin-top:5px;font-weight:600}
+/* counters */
+.counters{display:flex;gap:0;border-top:1px solid var(--line);background:#fff}
+.counters div{flex:1;text-align:center;padding:16px 6px;border-right:1px solid var(--line)}
+.counters div:last-child{border-right:none}
+.counters .n{font-size:20px;font-weight:800;color:var(--mag)}
+.counters .l{font-size:10.5px;color:var(--sub);margin-top:3px}
+.madeby{color:#8a7365;font-size:11px}.madeby b{color:#5a4638}
+</style></head><body>
+<div class="cap">
+  <h1><span>Swar Shakti</span> — Live Web Portal Prototype</h1>
+  <p>The <b>Talent-to-Impact</b> booking engine. Set an event budget, pick talent, and watch every rupee split transparently across Artist, NGO &amp; Platform — with the human impact it creates.</p>
+  <span class="pill">Working demo · not slideware</span>
+</div>
+
+<div class="browser">
+  <div class="chrome"><div class="dots"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></div>
+    <div class="addr">🔒 <b>swarshakti.in</b>/book-talent</div></div>
+  <div class="site">
+    <div class="nav">
+      <div class="logo"><div class="m">♪</div>Swar Shakti</div>
+      <div class="navlinks"><span>Book Talent</span><span>For Artists</span><span>For NGOs</span><span>Impact</span></div>
+      <div class="book">Post an Event</div>
+    </div>
+    <div class="hero">
+      <h2>Book verified talent. <span>Create real impact.</span></h2>
+      <p>Every corporate event becomes income for an artist and funding for a cause — transparently.</p>
+    </div>
+    <div class="wrap">
+      <div class="panel">
+        <h3>Book an Event</h3>
+        <div class="hint">Corporate event requirement — see the impact before you confirm.</div>
+        <div class="field">
+          <div class="flabel"><span>Event budget</span><b id="budV">₹1,00,000</b></div>
+          <input id="bud" type="range" min="25000" max="500000" step="5000" value="100000">
+          <div class="presets" style="margin-top:10px" id="presets">
+            <div class="pset" data-v="50000">₹50k</div><div class="pset on" data-v="100000">₹1L</div>
+            <div class="pset" data-v="300000">₹3L</div><div class="pset" data-v="500000">₹5L</div>
+          </div>
+        </div>
+        <div class="field">
+          <div class="flabel"><span>Talent category</span></div>
+          <div class="cats" id="cats">
+            <div class="cat on" data-v="Folk Ensemble">🪕 Folk Ensemble</div>
+            <div class="cat" data-v="Classical Vocalist">🎤 Vocalist</div>
+            <div class="cat" data-v="Dance Troupe">💃 Dance Troupe</div>
+            <div class="cat" data-v="Live Band">🎸 Live Band</div>
+          </div>
+        </div>
+      </div>
+      <div class="panel">
+        <h3>Transparent Revenue Split</h3>
+        <div class="hint">Where your <span id="budEcho">₹1,00,000</span> goes — instantly.</div>
+        <div class="splitbar">
+          <div class="sp-a" id="barA">60%</div><div class="sp-n" id="barN">25%</div><div class="sp-p" id="barP">15%</div>
+        </div>
+        <div class="legend">
+          <div class="lrow"><div class="lft"><span class="sw" style="background:var(--mag)"></span><div class="who">Artist <small>Majority share — fair pay for talent</small></div></div><div class="amt" id="amtA">₹60,000</div></div>
+          <div class="lrow"><div class="lft"><span class="sw" style="background:var(--org)"></span><div class="who">NGO Partner <small>Sustainable social funding</small></div></div><div class="amt" id="amtN">₹25,000</div></div>
+          <div class="lrow"><div class="lft"><span class="sw" style="background:var(--gold)"></span><div class="who">Platform <small>Operations &amp; trust layer</small></div></div><div class="amt" id="amtP">₹15,000</div></div>
+        </div>
+        <div class="impact"><div class="t">🌱 This one booking creates</div>
+          <div class="big" id="impact"></div></div>
+      </div>
+    </div>
+    <div class="talent-h">Verified talent for this event</div>
+    <div class="grid" id="talent"></div>
+    <div class="counters">
+      <div><div class="n" id="c1">1,240</div><div class="l">Artists Supported</div></div>
+      <div><div class="n" id="c2">₹3.8 Cr</div><div class="l">Funds to NGOs</div></div>
+      <div><div class="n" id="c3">560</div><div class="l">Events Conducted</div></div>
+      <div><div class="n" id="c4">92</div><div class="l">NGO Partners</div></div>
+    </div>
+  </div>
+</div>
+<div class="madeby">Prototype built for the client walkthrough · <b>Nivaran Technologies</b></div>
+
+<script>
+const S={bud:100000,cat:'Folk Ensemble'};
+const fmt=n=>'₹'+n.toLocaleString('en-IN');
+const TALENT={
+ 'Folk Ensemble':[['🪕','Lavani Rhythms','Folk troupe · Pune',4.9,'Seva Sangh NGO'],['🎻','Warli Beats','Tribal fusion · Palghar',4.7,'Adivasi Kala'],['🥁','Dhol Tasha Collective','Percussion · Nashik',4.8,'Yuva Trust'],['🪈','Bansuri Bros','Flute duo · Nagpur',4.6,'Sur Foundation']],
+ 'Classical Vocalist':[['🎤','Meera Kulkarni','Hindustani · Pune',4.9,'Kala Kendra'],['🎼','Anjali Rao','Carnatic · Nagpur',4.8,'Raag Trust'],['🎙️','Sufi Nights','Sufi vocal · Aurangabad',4.7,'Ekta NGO'],['🎵','Bhajan Mandali','Devotional · Nashik',4.6,'Bhakti Seva']],
+ 'Dance Troupe':[['💃','Nritya Dhaara','Kathak · Mumbai',4.9,'Natya NGO'],['🩰','Folk Feet','Koli dance · Thane',4.7,'Tarang Trust'],['🕺','Rhythm Nation','Contemporary · Pune',4.8,'Yuva Kala'],['👯','Garba Gang','Folk · Nashik',4.6,'Utsav NGO']],
+ 'Live Band':[['🎸','The Deccan','Fusion rock · Pune',4.8,'Sound Seva'],['🎹','Indie Sur','Indie · Mumbai',4.7,'Music4All'],['🎺','Brass Junction','Jazz · Nagpur',4.6,'Swar NGO'],['🥁','Beat Route','Pop · Nashik',4.7,'Taal Trust']]
+};
+function bindPresets(){document.querySelectorAll('#presets .pset').forEach(p=>p.onclick=()=>{S.bud=+p.dataset.v;document.getElementById('bud').value=S.bud;render();});}
+function bindCats(){document.querySelectorAll('#cats .cat').forEach(c=>c.onclick=()=>{document.querySelectorAll('#cats .cat').forEach(x=>x.classList.remove('on'));c.classList.add('on');S.cat=c.dataset.v;render();});}
+document.getElementById('bud').oninput=e=>{S.bud=+e.target.value;document.querySelectorAll('#presets .pset').forEach(x=>x.classList.toggle('on',+x.dataset.v===S.bud));render();};
+bindPresets();bindCats();
+function render(){
+ const b=S.bud, a=Math.round(b*.6), n=Math.round(b*.25), p=b-a-n;
+ document.getElementById('budV').textContent=fmt(b);
+ document.getElementById('budEcho').textContent=fmt(b);
+ document.getElementById('amtA').textContent=fmt(a);
+ document.getElementById('amtN').textContent=fmt(n);
+ document.getElementById('amtP').textContent=fmt(p);
+ const days=Math.round(n/500); const kids=Math.round(n/1200); const artists=S.cat==='Folk Ensemble'?4:(S.cat==='Dance Troupe'?6:3);
+ document.getElementById('impact').innerHTML=
+   `Income for <b>${artists} artists</b> · funds <b>${days} days</b> of NGO skill-training · supports <b>${kids} children's</b> cultural education — from a single event.`;
+ // talent grid
+ const t=TALENT[S.cat]; const colors=['#fbe9f0','#fff0e6','#f3ecfb','#e6f7f4'];
+ document.getElementById('talent').innerHTML=t.map((x,i)=>{
+   const price=Math.round(b*0.6/ (x[0]?1:1)); // artist pool share indicative
+   return `<div class="tcard"><div class="ph" style="background:${colors[i%4]}">${x[0]}</div>
+     <div class="info"><div class="nm">${x[1]}</div><div class="rl">${x[2]}</div>
+     <div class="foot"><span class="rt">★ ${x[3]}</span><span class="pr">${fmt(Math.round(a/(i+1.6)))}+</span></div>
+     <div class="ngo">◈ Supports ${x[4]}</div></div></div>`;
+ }).join('');
+}
+render();
+</script></body></html>

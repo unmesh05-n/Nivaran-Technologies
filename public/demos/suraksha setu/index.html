@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Suraksha Setu — Full Product Demo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/geist@1.0.0/dist/fonts/geist-sans/style.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: { extend: { fontFamily: { sans: ['Geist Sans','sans-serif'], serif: ['Cormorant Garamond','serif'] } } }
+    }
+  </script>
+  <style>
+    body{font-family:'Geist Sans',sans-serif;background:#0a0a0a;color:#e5e5e5}
+    .serif{font-family:'Cormorant Garamond',serif}
+    .frame-box{aspect-ratio:16/9;background:#0d0d0d;position:relative;overflow:hidden}
+    .frame{display:none;position:absolute;inset:0}
+    .frame.active{display:flex}
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+    @keyframes countUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes orbitIn{from{opacity:0;transform:scale(.3) rotate(-20deg)}to{opacity:1;transform:scale(1) rotate(0)}}
+    @keyframes slideR{from{opacity:0;transform:translateX(-30px)}to{opacity:1;transform:translateX(0)}}
+    @keyframes slideUp{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes barGrow{from{width:0}to{width:var(--w)}}
+    @keyframes pulse{0%,100%{opacity:.4;transform:scale(1)}50%{opacity:1;transform:scale(1.08)}}
+    @keyframes glowPulse{0%,100%{box-shadow:0 0 15px rgba(16,185,129,.15)}50%{box-shadow:0 0 35px rgba(16,185,129,.4)}}
+    @keyframes drawPath{from{stroke-dashoffset:400}to{stroke-dashoffset:0}}
+    @keyframes scoreArc{from{stroke-dashoffset:264}to{stroke-dashoffset:var(--target)}}
+    @keyframes chatIn{from{opacity:0;transform:translateY(8px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
+    @keyframes dotPing{0%{transform:scale(1);opacity:.6}100%{transform:scale(2.5);opacity:0}}
+    .frame.active .a-fade{animation:fadeIn .7s ease forwards}
+    .frame.active .a-count{animation:countUp .6s ease forwards}
+    .frame.active .a-orbit{animation:orbitIn .5s ease forwards}
+    .frame.active .a-sr{animation:slideR .5s ease forwards}
+    .frame.active .a-su{animation:slideUp .5s ease forwards}
+    .frame.active .a-bar{animation:barGrow .8s ease forwards}
+    .frame.active .a-pulse{animation:pulse 2s ease infinite}
+    .frame.active .a-glow{animation:glowPulse 2s ease infinite}
+    .frame.active .a-chat{animation:chatIn .4s ease forwards}
+    .d1{animation-delay:.15s!important;opacity:0}
+    .d2{animation-delay:.3s!important;opacity:0}
+    .d3{animation-delay:.45s!important;opacity:0}
+    .d4{animation-delay:.6s!important;opacity:0}
+    .d5{animation-delay:.75s!important;opacity:0}
+    .d6{animation-delay:.9s!important;opacity:0}
+    .d7{animation-delay:1.05s!important;opacity:0}
+    .d8{animation-delay:1.2s!important;opacity:0}
+    .d9{animation-delay:1.35s!important;opacity:0}
+    .d10{animation-delay:1.5s!important;opacity:0}
+    .td{transition:all .25s ease}
+    .td.on{background:#34d399;transform:scale(1.5)}
+    .td.done{background:#065f46}
+    .nb{transition:all .2s ease}
+    .nb:disabled{opacity:.15;cursor:not-allowed}
+    .nb:not(:disabled):hover{background:#065f46}
+    ::-webkit-scrollbar{width:3px;height:3px}
+    ::-webkit-scrollbar-track{background:#111}
+    ::-webkit-scrollbar-thumb{background:#333;border-radius:2px}
+    .phone{width:160px;min-height:280px;background:#111;border:2px solid #222;border-radius:16px;overflow:hidden;flex-shrink:0}
+    @media(min-width:768px){.phone{width:200px;min-height:340px}}
+  </style>
+</head>
+<body class="antialiased min-h-screen">
+
+<div class="max-w-6xl mx-auto px-4 md:px-6 pt-6 pb-3">
+  <div class="flex items-center justify-between flex-wrap gap-2">
+    <div>
+      <div class="flex items-center gap-2 mb-1">
+        <div class="w-2 h-2 rounded-full bg-emerald-500"></div>
+        <p class="text-[10px] font-bold uppercase tracking-[.2em] text-emerald-400/70">Full Product Demo</p>
+      </div>
+      <h1 class="serif text-xl md:text-2xl text-white tracking-tight">Suraksha Setu</h1>
+      <p class="text-[11px] text-stone-600 mt-0.5">Click through every frame · Arrow keys work · 21 frames · Nothing excluded</p>
+    </div>
+    <div class="flex items-center gap-3 text-[10px] text-stone-600">
+      <span>AI-Powered Community Safety</span>
+      <span>·</span>
+      <span>8 Components</span>
+      <span>·</span>
+      <span>Complete Walkthrough</span>
+    </div>
+  </div>
+</div>
+
+<div class="max-w-6xl mx-auto px-4 md:px-6 pb-4">
+  <div class="frame-box rounded-sm border border-[#1a1a1a]">
+
+    <!-- ===== F1: PROBLEM NUMBERS ===== -->
+    <div class="frame active" id="f1">
+      <div class="w-full h-full flex flex-col items-center justify-center bg-[#0a0a0a] p-6 md:p-10">
+        <p class="text-[10px] font-bold uppercase tracking-[.2em] text-red-400/50 mb-8 a-fade">The Problem India Faces</p>
+        <div class="grid grid-cols-2 gap-x-12 md:gap-x-20 gap-y-6 md:gap-y-8 text-center">
+          <div class="a-count"><p class="serif text-5xl md:text-7xl font-light text-red-400/80">54<span class="text-3xl md:text-4xl">%</span></p><p class="text-[11px] text-stone-500 mt-2 max-w-[180px]">of women in Indian cities feel unsafe walking alone after dark</p><p class="text-[9px] text-stone-700 mt-1">— Thomson Reuters</p></div>
+          <div class="a-count d1"><p class="serif text-5xl md:text-7xl font-light text-red-400/80">15<span class="text-3xl md:text-4xl">min</span></p><p class="text-[11px] text-stone-500 mt-2 max-w-[180px]">average emergency response time via Dial 100 — too long in critical moments</p></div>
+          <div class="a-count d2"><p class="serif text-5xl md:text-7xl font-light text-red-400/80">6</p><p class="text-[11px] text-stone-500 mt-2 max-w-[180px]">critical safety challenges that existing solutions fail to address</p></div>
+          <div class="a-count d3"><p class="serif text-5xl md:text-7xl font-light text-red-400/80">0</p><p class="text-[11px] text-stone-500 mt-2 max-w-[180px]">platforms that connect prevention, protection, response AND recovery</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== F2: 6 CHALLENGES ===== -->
+    <div class="frame" id="f2">
+      <div class="w-full h-full flex items-center justify-center bg-[#0a0a0a] p-6 md:p-10">
+        <div class="w-full max-w-3xl">
+          <p class="text-[10px] font-bold uppercase tracking-[.2em] text-red-400/50 mb-6 a-fade">6 Challenges — Beyond Emergency Response</p>
+          <div class="grid md:grid-cols-2 gap-3">
+            <div class="flex gap-3 p-3 bg-[#111] border border-[#1e1e1e] rounded-sm a-sr"><span class="text-red-400/60 text-sm font-bold shrink-0">01</span><div><p class="text-xs font-medium text-stone-300">No Real-Time Safety Info</p><p class="text-[10px] text-stone-600 mt-0.5">No dynamic safety scores for areas or routes. Familiar routes may be unsafe at different times.</p></div></div>
+            <div class="flex gap-3 p-3 bg-[#111] border border-[#1e1e1e] rounded-sm a-sr d1"><span class="text-red-400/60 text-sm font-bold shrink-0">02</span><div><p class="text-xs font-medium text-stone-300">Emergency Response Delays</p><p class="text-[10px] text-stone-600 mt-0.5">15+ min average. Inconsistent across cities. Every second counts in critical situations.</p></div></div>
+            <div class="flex gap-3 p-3 bg-[#111] border border-[#1e1e1e] rounded-sm a-sr d2"><span class="text-red-400/60 text-sm font-bold shrink-0">03</span><div><p class="text-xs font-medium text-stone-300">Child Safety During Commutes</p><p class="text-[10px] text-stone-600 mt-0.5">School commutes, route deviations, unfamiliar surroundings. Parents have zero real-time visibility.</p></div></div>
+            <div class="flex gap-3 p-3 bg-[#111] border border-[#1e1e1e] rounded-sm a-sr d3"><span class="text-red-400/60 text-sm font-bold shrink-0">04</span><div><p class="text-xs font-medium text-stone-300">Untapped Community Resources</p><p class="text-[10px] text-stone-600 mt-0.5">Local businesses, hospitals, pharmacies, volunteers — willing to help but no system organizes them.</p></div></div>
+            <div class="flex gap-3 p-3 bg-[#111] border border-[#1e1e1e] rounded-sm a-sr d4"><span class="text-red-400/60 text-sm font-bold shrink-0">05</span><div><p class="text-xs font-medium text-stone-300">No Safe Route Guidance</p><p class="text-[10px] text-stone-600 mt-0.5">Navigation apps optimize for speed. None factor in lighting, crowd density, incident history.</p></div></div>
+            <div class="flex gap-3 p-3 bg-[#111] border border-[#1e1e1e] rounded-sm a-sr d5"><span class="text-red-400/60 text-sm font-bold shrink-0">06</span><div><p class="text-xs font-medium text-stone-300">Post-Incident Support Gap</p><p class="text-[10px] text-stone-600 mt-0.5">After an incident: legal, medical, emotional challenges faced alone. No integrated recovery support.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== F3: WHY NOW ===== -->
+    <div class="frame" id="f3">
+      <div class="w-full h-full flex items-center justify-center bg-[#0a0a0a] p-6 md:p-10">
+        <div class="w-full max-w-2xl text-center">
+          <p class="text-[10px] font-bold uppercase tracking-[.2em] text-emerald-400/50 mb-6 a-fade">Why Now — The Convergence</p>
+          <div class="grid grid-cols-2 gap-4 md:gap-6 mb-8">
+            <div class="p-5 bg-[#111] border border-[#1e1e1e] rounded-sm a-count"><p class="serif text-3xl md:text-5xl text-emerald-400">50Cr+</p><p class="text-[11px] text-stone-500 mt-1">Smartphone users with GPS — digital infrastructure ready</p></div>
+            <div class="p-5 bg-[#111] border border-[#1e1e1e] rounded-sm a-count d1"><p class="serif text-3xl md:text-5xl text-emerald-400">100+</p><p class="text-[11px] text-stone-500 mt-1">Smart cities with surveillance infrastructure — hardware exists</p></div>
+            <div class="p-5 bg-[#111] border border-[#1e1e1e] rounded-sm a-count d2"><p class="serif text-3xl md:text-5xl text-emerald-400">10M+</p><p class="text-[11px] text-stone-500 mt-1">Users on safety-focused apps — proving massive demand</p></div>
+            <div class="p-5 bg-[#111] border border-[#1e1e1e] rounded-sm a-count d3"><p class="serif text-3xl md:text-5xl text-emerald-400">AI+IoT</p><p class="text-[11px] text-stone-500 mt-1">Real-time analytics make predictive safety possible at scale</p></div>
+          </div>
+          <p class="text-xs text-stone-600 a-fade d4">Digital India · Smart Cities Mission · Expanded connectivity — the foundation exists. The ecosystem doesn't.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== F4: COMPETITOR GAPS ===== -->
+    <div class="frame" id="f4">
+      <div class="w-full h-full flex items-center justify-center bg-[#0a0a0a] p-6 md:p-10">
+        <div class="w-full max-w-3xl">
+          <p class="text-[10px] font-bold uppercase tracking-[.2em] text-red-400/50 mb-2 a-fade">Existing Landscape</p>
+          <p class="text-xs text-stone-500 mb-6 a-fade d1">10M+ combined users prove massive demand — but <span class="text-red-400">NO platform</span> covers all layers</p>
+          <div class="space-y-2">
+            <div class="flex items-center gap-3 p-2.5 bg-[#111] border border-[#1e1e1e] rounded-sm a-sr"><iconify-icon icon="lucide:x" width="14" class="text-red-400/60 shrink-0"></iconify-icon><p class="text-[11px] text-stone-400"><span class="text-stone-300 font-medium">No Preventive Intelligence</span> — All reactive. No AI predicts or prevents unsafe situations.</p></div>
+            <div class="flex items-center gap-3 p-2.5 bg-[#111] border border-[#1e1e1e] rounded-sm a-sr d1"><iconify-icon icon="lucide:x" width="14" class="text-red-400/60 shrink-0"></iconify-icon><p class="text-[11px] text-stone-400"><span class="text-stone-300 font-medium">No Hyperlocal Community</span> — Businesses, residents, volunteers disconnected and uncoordinated.</p></div>
+            <div class="flex items-center gap-3 p-2.5 bg-[#111] border border-[#1e1e1e] rounded-sm a-sr d2"><iconify-icon icon="lucide:x" width="14" class="text-red-400/60 shrink-0"></iconify-icon><p class="text-[11px] text-stone-400"><span class="text-stone-300 font-medium">No Safe Route Guidance</span> — Navigation = speed. No system factors real-time safety conditions.</p></div>
+            <div class="flex items-center gap-3 p-2.5 bg-[#111] border border-[#1e1e1e] rounded-sm a-sr d3"><iconify-icon icon="lucide:x" width="14" class="text-red-400/60 shrink-0"></iconify-icon><p class="text-[11px] text-stone-400"><span class="text-stone-300 font-medium">Family Monitoring Missing</span> — No child tracking, geofence alerts, or route deviation notifications.</p></div>
+            <div class="flex items-center gap-3 p-2.5 bg-[#111] border border-[#1e1e1e] rounded-sm a-sr d4"><iconify-icon icon="lucide:x" width="14" class="text-red-400/60 shrink-0"></iconify-icon><p class="text-[11px] text-stone-400"><span class="text-stone-300 font-medium">Recovery Support Absent</span> — Post-incident: no legal aid, counseling, documentation, or scheme access.</p></div>
+            <div class="flex items-center gap-3 p-2.5 bg-[#111] border border-[#1e1e1e] rounded-sm a-sr d5"><iconify-icon icon="lucide:x" width="14" class="text-red-400/60 shrink-0"></iconify-icon><p class="text-[11px] text-stone-400"><span class="text-stone-300 font-medium">No Ecosystem Integration</span> — Police, volunteers, businesses, apps — all disconnected.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== F5: TITLE CARD ===== -->
+    <div class="frame" id="f5">
+      <div class="w-full h-full flex flex-col items-center justify-center bg-[#0a0a0a] p-6">
+        <div class="w-20 h-20 rounded-full bg-emerald-500/10 border-2 border-emerald-500/40 flex items-center justify-center mb-6 a-fade a-glow"><iconify-icon icon="lucide:shield-check" width="36" class="text-emerald-400"></iconify-icon></div>
+        <h2 class="serif text-4xl md:text-6xl text-white a-su d1 tracking-tight">Suraksha Setu</h2>
+        <p class="text-sm text-emerald-400/60 mt-3 a-fade d2">AI-Powered Community Safety & Mobility Ecosystem</p>
+        <p class="serif text-lg text-white/50 mt-4 a-fade d3">Safer Neighborhoods. Stronger Communities. Connected Protection.</p>
+        <div class="flex items-center gap-3 mt-8 a-fade d4">
+          <span class="text-[10px] text-emerald-400/40 uppercase tracking-widest border border-emerald-500/20 px-3 py-1.5 rounded-sm">Prevention</span>
+          <iconify-icon icon="lucide:arrow-right" width="12" class="text-emerald-500/20"></iconify-icon>
+          <span class="text-[10px] text-blue-400/40 uppercase tracking-widest border border-blue-500/20 px-3 py-1.5 rounded-sm">Protection</span>
+          <iconify-icon icon="lucide:arrow-right" width="12" class="text-blue-500/20"></iconify-icon>
+          <span class="text-[10px] text-amber-400/40 uppercase tracking-widest border border-amber-500/20 px-3 py-1.5 rounded-sm">Response</span>
+          <iconify-icon icon="lucide:arrow-right" width="12" class="text-amber-500/20"></iconify-icon>
+          <span class="text-[10px] text-purple-400/40 uppercase tracking-widest border border-purple-500/20 px-3 py-1.5 rounded-sm">Recovery</span>
+        </div>
+        <p class="text-[10px] text-stone-700 mt-8 a-fade d5">8 Integrated Components · 1 Unified Ecosystem</p>
+      </div>
+    </div>
+
+    <!-- ===== F6: 8 COMPONENTS OVERVIEW ===== -->
+    <div class="frame" id="f6">
+      <div class="w-full h-full flex items-center justify-center bg-[#0a0a0a] p-4 md:p-8">
+        <div class="w-full max-w-3xl">
+          <p class="text-[10px] font-bold uppercase tracking-[.2em] text-emerald-400/50 mb-5 a-fade">The Complete Ecosystem — 8 Components</p>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+            <div class="p-3 bg-emerald-500/5 border border-emerald-500/15 rounded-sm a-orbit"><iconify-icon icon="lucide:map-pin" width="18" class="text-emerald-400/70"></iconify-icon><p class="text-[10px] font-medium text-stone-300 mt-1.5">Safe Zone Network</p><p class="text-[9px] text-stone-600 mt-0.5">7 types of verified refuges</p></div>
+            <div class="p-3 bg-emerald-500/5 border border-emerald-500/15 rounded-sm a-orbit d1"><iconify-icon icon="lucide:brain" width="18" class="text-emerald-400/70"></iconify-icon><p class="text-[10px] font-medium text-stone-300 mt-1.5">AI Risk Intelligence</p><p class="text-[9px] text-stone-600 mt-0.5">8-factor real-time scoring</p></div>
+            <div class="p-3 bg-blue-500/5 border border-blue-500/15 rounded-sm a-orbit d2"><iconify-icon icon="lucide:users" width="18" class="text-blue-400/70"></iconify-icon><p class="text-[10px] font-medium text-stone-300 mt-1.5">Community Volunteers</p><p class="text-[9px] text-stone-600 mt-0.5">&lt;3 min response target</p></div>
+            <div class="p-3 bg-blue-500/5 border border-blue-500/15 rounded-sm a-orbit d3"><iconify-icon icon="lucide:navigation" width="18" class="text-blue-400/70"></iconify-icon><p class="text-[10px] font-medium text-stone-300 mt-1.5">Emergency Corridor</p><p class="text-[9px] text-stone-600 mt-0.5">Safest route, not shortest</p></div>
+            <div class="p-3 bg-amber-500/5 border border-amber-500/15 rounded-sm a-orbit d4"><iconify-icon icon="lucide:car" width="18" class="text-amber-400/70"></iconify-icon><p class="text-[10px] font-medium text-stone-300 mt-1.5">Pink Mobility</p><p class="text-[9px] text-stone-600 mt-0.5">Women-led safe transport</p></div>
+            <div class="p-3 bg-amber-500/5 border border-amber-500/15 rounded-sm a-orbit d5"><iconify-icon icon="lucide:eye" width="18" class="text-amber-400/70"></iconify-icon><p class="text-[10px] font-medium text-stone-300 mt-1.5">Family Guardian</p><p class="text-[9px] text-stone-600 mt-0.5">Geofence + route tracking</p></div>
+            <div class="p-3 bg-purple-500/5 border border-purple-500/15 rounded-sm a-orbit d6"><iconify-icon icon="lucide:file-text" width="18" class="text-purple-400/70"></iconify-icon><p class="text-[10px] font-medium text-stone-300 mt-1.5">Incident Docs</p><p class="text-[9px] text-stone-600 mt-0.5">Legal + counseling + schemes</p></div>
+            <div class="p-3 bg-purple-500/5 border border-purple-500/15 rounded-sm a-orbit d7"><iconify-icon icon="lucide:shield" width="18" class="text-purple-400/70"></iconify-icon><p class="text-[10px] font-medium text-stone-300 mt-1.5">Police Integration</p><p class="text-[9px] text-stone-600 mt-0.5">Control room + digital FIR</p></div>
+          </div>
+          <div class="flex items-center justify-center gap-3 mt-5 a-fade d8">
+            <span class="text-[9px] text-emerald-400/40 uppercase tracking-wider">Prevention</span>
+            <span class="w-6 h-px bg-emerald-500/20"></span>
+            <span class="text-[9px] text-blue-400/40 uppercase tracking-wider">Protection</span>
+            <span class="w-6 h-px bg-blue-500/20"></span>
+            <span class="text-[9px] text-amber-400/40 uppercase tracking-wider">Response</span>
+            <span class="w-6 h-px bg-amber-500/20"></span>
+            <span class="text-[9px] text-purple-400/40 uppercase tracking-wider">Recovery</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== F7: SAFE ZONE NETWORK ===== -->
+    <div class="frame" id="f7">
+      <div class="w-full h-full flex items-center justify-center bg-[#0a0a0a] p-4 md:p-8">
+        <div class="flex flex-col md:flex-row items-center gap-6 md:gap-10 w-full max-w-4xl">
+          <div class="phone p-3 a-sr">
+            <div class="bg-[#0d0d0d] rounded-lg h-full flex flex-col">
+              <div class="p-2 border-b border-[#1a1a1a]"><p class="text-[8px] text-stone-600 text-center">SURAKSHA SETU · MAP</p></div>
+              <div class="flex-1 relative p-2">
+                <div class="absolute inset-2 grid grid-cols-6 grid-rows-8 gap-0.5 opacity-10"><div class="bg-[#222] rounded-sm"></div><div class="bg-[#222] rounded-sm"></div><div class="bg-[#222] rounded-sm"></div><div class="bg-[#222] rounded-sm"></div><div class="bg-[#222] rounded-sm"></div><div class="bg-[#222] rounded-sm"></div><div class="bg-[#222] rounded-sm"></div><div class="bg-[#222] rounded-sm"></div><div class="bg-[#222] rounded-sm"></div><div class="bg-[#222] rounded-sm"></div><div class="bg-[#222] rounded-sm"></div><div class="bg-[#222] rounded-sm"></div><div class="bg-[#222] rounded-sm"></div><div class="bg-[#222] rounded-sm"></div><div class="bg-[#222] rounded-sm"></div><div class="bg-[#222] rounded-sm"></div><div class="bg-[#222] rounded-sm"></div><div class="bg-[#222] rounded-sm"></div><div class="bg-[#222] rounded-sm"></div><div class="bg-[#222] rounded-sm"></div><div class="bg-[#222] rounded-sm"></div><div class="bg-[#222] rounded-sm"></div><div class="bg-[#222] rounded-sm"></div><div class="bg-[#222] rounded-sm"></div><div class="bg-[#222] rounded-sm"></div><div class="bg-[#222] rounded-sm"></div><div class="bg-[#222] rounded-sm"></div><div class="bg-[#222] rounded-sm"></div><div class="bg-[#222] rounded-sm"></div><div class="bg-[#222] rounded-sm"></div><div class="bg-[#222] rounded-sm"></div><div class="bg-[#222] rounded-sm"></div><div class="bg-[#222] rounded-sm"></div><div class="bg-[#222] rounded-sm"></div><div class="bg-[#222] rounded-sm"></div><div class="bg-[#222] rounded-sm"></div><div class="bg-[#222] rounded-sm"></div><div class="bg-[#222] rounded-sm"></div><div class="bg-[#222] rounded-sm"></div><div class="bg-[#222] rounded-sm"></div><div class="bg-[#222] rounded-sm"></div><div class="bg-[#222] rounded-sm"></div><div class="bg-[#222] rounded-sm"></div><div class="bg-[#222] rounded-sm"></div><div class="bg-[#222] rounded-sm"></div><div class="bg-[#222] rounded-sm"></div><div class="bg-[#222] rounded-sm"></div><div class="bg-[#222] rounded-sm"></div><div class="bg-[#222] rounded-sm"></div><div class="bg-[#222] rounded-sm"></div></div>
+                <div class="absolute a-fade d1" style="top:12%;left:25%"><div class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-lg shadow-emerald-400/60"></div><span class="text-[7px] text-emerald-400 ml-1.5 absolute top-0 left-3 whitespace-nowrap">🏥 Hospital</span></div>
+                <div class="absolute a-fade d2" style="top:30%;left:60%"><div class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-lg shadow-emerald-400/60"></div><span class="text-[7px] text-emerald-400 ml-1.5 absolute top-0 left-3 whitespace-nowrap">💊 24hr Pharmacy</span></div>
+                <div class="absolute a-fade d3" style="top:50%;left:20%"><div class="w-2.5 h-2.5 rounded-full bg-blue-400 shadow-lg shadow-blue-400/60"></div><span class="text-[7px] text-blue-400 ml-1.5 absolute top-0 left-3 whitespace-nowrap">🏛️ Police Stn</span></div>
+                <div class="absolute a-fade d4" style="top:20%;left:75%"><div class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-lg shadow-emerald-400/60"></div><span class="text-[7px] text-emerald-400 ml-1.5 absolute top-0 left-3 whitespace-nowrap">🏫 School</span></div>
+                <div class="absolute a-fade d5" style="top:65%;left:55%"><div class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-lg shadow-emerald-400/60"></div><span class="text-[7px] text-emerald-400 ml-1.5 absolute top-0 left-3 whitespace-nowrap">🏪 24hr Store</span></div>
+                <div class="absolute a-fade d6" style="top:75%;left:30%"><div class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-lg shadow-emerald-400/60"></div></div>
+                <div class="absolute a-fade d7" style="top:40%;left:42%"><div class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-lg shadow-emerald-400/60"></div></div>
+                <div class="absolute a-fade d8" style="top:85%;left:70%"><div class="w-2.5 h-2.5 rounded-full bg-blue-400 shadow-lg shadow-blue-400/60"></div><span class="text-[7px] text-blue-400 ml-1.5 absolute top-0 left-3 whitespace-nowrap">🏘️ Sec. Office</span></div>
+              </div>
+              <div class="p-2 border-t border-[#1a1a1a]"><p class="text-[7px] text-emerald-400/50 text-center">8 Safe Zones within 1.5 km</p></div>
+            </div>
+          </div>
+          <div class="flex-1">
+            <p class="text-[10px] font-bold uppercase tracking-[.2em] text-emerald-400/50 mb-3 a-fade">Component 1 — Safe Zone Network</p>
+            <p class="text-xs text-stone-400 mb-4 a-fade d1">Verified locations mapped as instant refuges — geo-tagged, categorized by services, visible in real-time.</p>
+            <div class="space-y-1.5">
+              <div class="flex items-center gap-2 a-sr d2"><iconify-icon icon="lucide:hospital" width="12" class="text-emerald-400/50"></iconify-icon><span class="text-[10px] text-stone-400">Hospitals & nursing homes — medical emergency</span></div>
+              <div class="flex items-center gap-2 a-sr d3"><iconify-icon icon="lucide:pill" width="12" class="text-emerald-400/50"></iconify-icon><span class="text-[10px] text-stone-400">24-hour pharmacies — accessible at all hours</span></div>
+              <div class="flex items-center gap-2 a-sr d4"><iconify-icon icon="lucide:shield" width="12" class="text-blue-400/50"></iconify-icon><span class="text-[10px] text-stone-400">Police stations — direct law enforcement</span></div>
+              <div class="flex items-center gap-2 a-sr d5"><iconify-icon icon="lucide:graduation-cap" width="12" class="text-emerald-400/50"></iconify-icon><span class="text-[10px] text-stone-400">Educational institutions — campus safety</span></div>
+              <div class="flex items-center gap-2 a-sr d6"><iconify-icon icon="lucide:store" width="12" class="text-emerald-400/50"></iconify-icon><span class="text-[10px] text-stone-400">24-hour businesses — commercial safe spaces</span></div>
+              <div class="flex items-center gap-2 a-sr d7"><iconify-icon icon="lucide:home" width="12" class="text-emerald-400/50"></iconify-icon><span class="text-[10px] text-stone-400">Residential security offices — neighborhood support</span></div>
+              <div class="flex items-center gap-2 a-sr d8"><iconify-icon icon="lucide:landmark" width="12" class="text-emerald-400/50"></iconify-icon><span class="text-[10px] text-stone-400">Community centers — gathering point safety</span></div>
+            </div>
+            <p class="text-[9px] text-stone-600 mt-3 a-fade d9">In emergencies: auto-highlights nearest Safe Zone with navigation. Businesses can apply to become verified.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== F8: AI RISK INTELLIGENCE ===== -->
+    <div class="frame" id="f8">
+      <div class="w-full h-full flex items-center justify-center bg-[#0a0a0a] p-4 md:p-8">
+        <div class="w-full max-w-3xl">
+          <p class="text-[10px] font-bold uppercase tracking-[.2em] text-emerald-400/50 mb-4 a-fade">Component 2 — AI Risk Intelligence Engine</p>
+          <p class="text-xs text-stone-500 mb-5 a-fade d1">Continuously evaluates 8 factors to generate real-time safety scores (0-10) for areas and routes.</p>
+          <div class="grid grid-cols-4 gap-2 mb-5">
+            <div class="p-2.5 bg-[#111] border border-[#1e1e1e] rounded-sm text-center a-orbit d1"><iconify-icon icon="lucide:map-pin" width="16" class="text-emerald-400/60"></iconify-icon><p class="text-[9px] text-stone-400 mt-1">Location</p><p class="text-[8px] text-stone-600">Area risk profiling</p></div>
+            <div class="p-2.5 bg-[#111] border border-[#1e1e1e] rounded-sm text-center a-orbit d2"><iconify-icon icon="lucide:clock" width="16" class="text-emerald-400/60"></iconify-icon><p class="text-[9px] text-stone-400 mt-1">Time of Day</p><p class="text-[8px] text-stone-600">Day/night variation</p></div>
+            <div class="p-2.5 bg-[#111] border border-[#1e1e1e] rounded-sm text-center a-orbit d3"><iconify-icon icon="lucide:users" width="16" class="text-emerald-400/60"></iconify-icon><p class="text-[9px] text-stone-400 mt-1">Crowd Density</p><p class="text-[8px] text-stone-600">People as safety factor</p></div>
+            <div class="p-2.5 bg-[#111] border border-[#1e1e1e] rounded-sm text-center a-orbit d4"><iconify-icon icon="lucide:sun" width="16" class="text-emerald-400/60"></iconify-icon><p class="text-[9px] text-stone-400 mt-1">Lighting</p><p class="text-[8px] text-stone-600">Street light availability</p></div>
+            <div class="p-2.5 bg-[#111] border border-[#1e1e1e] rounded-sm text-center a-orbit d5"><iconify-icon icon="lucide:cloud" width="16" class="text-emerald-400/60"></iconify-icon><p class="text-[9px] text-stone-400 mt-1">Weather</p><p class="text-[8px] text-stone-600">Rain, fog → low visibility</p></div>
+            <div class="p-2.5 bg-[#111] border border-[#1e1e1e] rounded-sm text-center a-orbit d6"><iconify-icon icon="lucide:alert-triangle" width="16" class="text-amber-400/60"></iconify-icon><p class="text-[9px] text-stone-400 mt-1">Incident History</p><p class="text-[8px] text-stone-600">Past reports in area</p></div>
+            <div class="p-2.5 bg-[#111] border border-[#1e1e1e] rounded-sm text-center a-orbit d7"><iconify-icon icon="lucide:siren" width="16" class="text-red-400/60"></iconify-icon><p class="text-[9px] text-stone-400 mt-1">Ongoing Alerts</p><p class="text-[8px] text-stone-600">Active emergencies</p></div>
+            <div class="p-2.5 bg-[#111] border border-[#1e1e1e] rounded-sm text-center a-orbit d8"><iconify-icon icon="lucide:message-square" width="16" class="text-emerald-400/60"></iconify-icon><p class="text-[9px] text-stone-400 mt-1">Community Reports</p><p class="text-[8px] text-stone-600">Crowd-sourced updates</p></div>
+          </div>
+          <div class="flex items-center gap-6 a-fade d9">
+            <div class="flex-1">
+              <div class="h-3 bg-[#1a1a1a] rounded-full overflow-hidden"><div class="h-full bg-gradient-to-r from-red-500 via-amber-500 to-emerald-500 rounded-full a-bar" style="--w:82%"></div></div>
+              <div class="flex justify-between mt-1"><span class="text-[8px] text-red-400/50">0 Dangerous</span><span class="text-[8px] text-emerald-400/50">10 Safe</span></div>
+            </div>
+            <div class="text-center"><p class="serif text-3xl text-emerald-400">8.2</p><p class="text-[8px] text-stone-600">Current area score</p></div>
+          </div>
+          <p class="text-[9px] text-stone-600 mt-3 a-fade d10">AI learns from patterns and improves predictions over time. Proactive alerts when entering high-risk zones.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== F9: COMMUNITY VOLUNTEERS ===== -->
+    <div class="frame" id="f9">
+      <div class="w-full h-full flex items-center justify-center bg-[#0a0a0a] p-4 md:p-8">
+        <div class="flex flex-col md:flex-row items-center gap-6 md:gap-10 w-full max-w-4xl">
+          <div class="phone p-3 a-sr">
+            <div class="bg-[#0d0d0d] rounded-lg h-full flex flex-col">
+              <div class="p-2 border-b border-[#1a1a1a]"><p class="text-[8px] text-stone-600 text-center">VOLUNTEER ALERT · SOS ACTIVE</p></div>
+              <div class="flex-1 p-2 space-y-2">
+                <div class="p-2 bg-red-500/10 border border-red-500/20 rounded a-chat"><p class="text-[7px] text-red-400 font-bold">SOS TRIGGERED</p><p class="text-[7px] text-stone-400 mt-0.5">Female, 27, near Dharampeth</p><p class="text-[7px] text-stone-500">200m from your location</p></div>
+                <div class="p-2 bg-emerald-500/5 border border-emerald-500/15 rounded a-chat d2"><p class="text-[7px] text-emerald-400 font-bold">YOUR RESPONSE</p><div class="flex gap-1.5 mt-1.5"><div class="flex-1 bg-emerald-500/20 rounded py-1 text-center"><span class="text-[7px] text-emerald-300">Accept</span></div><div class="flex-1 bg-[#1a1a1a] rounded py-1 text-center"><span class="text-[7px] text-stone-500">Decline</span></div></div></div>
+                <div class="p-2 bg-[#111] border border-[#1a1a1a] rounded a-chat d4"><p class="text-[7px] text-stone-500">Nearby Safe Zone</p><p class="text-[8px] text-emerald-400/70 mt-0.5">💊 Pharmacy · 180m →</p></div>
+                <div class="p-2 bg-[#111] border border-[#1a1a1a] rounded a-chat d5"><p class="text-[7px] text-stone-500">Other Responders</p><p class="text-[8px] text-stone-400 mt-0.5">Mrs. Gupta · 90m · Accepting</p><p class="text-[8px] text-stone-400 mt-0.5">Mr. Sharma · 250m · En route</p></div>
+              </div>
+            </div>
+          </div>
+          <div class="flex-1">
+            <p class="text-[10px] font-bold uppercase tracking-[.2em] text-blue-400/50 mb-3 a-fade">Component 3 — Community Volunteer Network</p>
+            <p class="text-xs text-stone-400 mb-4 a-fade d1">Trained, verified volunteers providing localized assistance — the human layer of the safety net.</p>
+            <div class="space-y-2">
+              <div class="flex gap-2 a-sr d2"><iconify-icon icon="lucide:check" width="12" class="text-emerald-400/60 mt-0.5 shrink-0"></iconify-icon><p class="text-[10px] text-stone-400">Background verification + basic safety training for all volunteers</p></div>
+              <div class="flex gap-2 a-sr d3"><iconify-icon icon="lucide:check" width="12" class="text-emerald-400/60 mt-0.5 shrink-0"></iconify-icon><p class="text-[10px] text-stone-400">SOS activated → nearby volunteers receive instant alert with location</p></div>
+              <div class="flex gap-2 a-sr d4"><iconify-icon icon="lucide:check" width="12" class="text-emerald-400/60 mt-0.5 shrink-0"></iconify-icon><p class="text-[10px] text-stone-400">Target: <span class="text-white font-medium">under 3-minute</span> response time in pilot cities</p></div>
+              <div class="flex gap-2 a-sr d5"><iconify-icon icon="lucide:check" width="12" class="text-emerald-400/60 mt-0.5 shrink-0"></iconify-icon><p class="text-[10px] text-stone-400">Non-emergency: walking companions, route guidance, safety escorts</p></div>
+              <div class="flex gap-2 a-sr d6"><iconify-icon icon="lucide:check" width="12" class="text-emerald-400/60 mt-0.5 shrink-0"></iconify-icon><p class="text-[10px] text-stone-400">Recognition programs + community leaderboards incentivize participation</p></div>
+              <div class="flex gap-2 a-sr d7"><iconify-icon icon="lucide:check" width="12" class="text-emerald-400/60 mt-0.5 shrink-0"></iconify-icon><p class="text-[10px] text-stone-400">Volunteers report safety conditions → improves AI Risk Intelligence</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== F10: EMERGENCY CORRIDOR ===== -->
+    <div class="frame" id="f10">
+      <div class="w-full h-full flex items-center justify-center bg-[#0a0a0a] p-4 md:p-8">
+        <div class="w-full max-w-3xl">
+          <p class="text-[10px] font-bold uppercase tracking-[.2em] text-blue-400/50 mb-5 a-fade">Component 4 — Emergency Corridor Routing</p>
+          <div class="flex flex-col md:flex-row gap-4 md:gap-6 mb-5">
+            <div class="flex-1 border border-red-500/20 rounded-sm p-4 bg-red-500/5 a-sr">
+              <div class="flex items-center justify-between mb-3"><span class="text-[9px] font-bold uppercase tracking-widest text-red-400">Shortcut</span><span class="serif text-4xl text-red-400">6.1</span></div>
+              <svg viewBox="0 0 200 50" class="w-full h-10"><path d="M10,40 Q30,40 45,15 T90,20 T130,40 T170,10 L195,25" stroke="#f87171" stroke-width="2" fill="none" stroke-dasharray="4,3" opacity=".4"/></svg>
+              <div class="flex flex-wrap gap-1 mt-2"><span class="text-[8px] text-red-400/50 bg-red-500/10 px-1.5 py-0.5 rounded">Poorly lit</span><span class="text-[8px] text-red-400/50 bg-red-500/10 px-1.5 py-0.5 rounded">No Safe Zones</span><span class="text-[8px] text-red-400/50 bg-red-500/10 px-1.5 py-0.5 rounded">2 recent incidents</span></div>
+            </div>
+            <div class="flex items-center a-fade d2"><iconify-icon icon="lucide:arrow-right" width="20" class="text-stone-600"></iconify-icon></div>
+            <div class="flex-1 border border-emerald-500/20 rounded-sm p-4 bg-emerald-500/5 a-sr d3">
+              <div class="flex items-center justify-between mb-3"><span class="text-[9px] font-bold uppercase tracking-widest text-emerald-400">Safer Route</span><span class="serif text-4xl text-emerald-400">8.2</span></div>
+              <svg viewBox="0 0 200 50" class="w-full h-10"><path d="M10,25 L195,25" stroke="#34d399" stroke-width="3" fill="none"/><circle cx="50" cy="25" r="4" fill="#34d399" opacity=".5"/><circle cx="120" cy="25" r="4" fill="#34d399" opacity=".5"/><circle cx="170" cy="25" r="4" fill="#34d399" opacity=".5"/></svg>
+              <div class="flex flex-wrap gap-1 mt-2"><span class="text-[8px] text-emerald-400/50 bg-emerald-500/10 px-1.5 py-0.5 rounded">Well-lit</span><span class="text-[8px] text-emerald-400/50 bg-emerald-500/10 px-1.5 py-0.5 rounded">3 Safe Zones</span><span class="text-[8px] text-emerald-400/50 bg-emerald-500/10 px-1.5 py-0.5 rounded">Volunteers nearby</span><span class="text-[8px] text-emerald-400/50 bg-emerald-500/10 px-1.5 py-0.5 rounded">Moderate crowd</span></div>
+            </div>
+          </div>
+          <div class="grid grid-cols-3 md:grid-cols-6 gap-2 a-fade d5">
+            <div class="p-2 bg-[#111] border border-[#1e1e1e] rounded-sm text-center"><iconify-icon icon="lucide:brain" width="14" class="text-emerald-400/50"></iconify-icon><p class="text-[8px] text-stone-500 mt-1">AI risk scores</p></div>
+            <div class="p-2 bg-[#111] border border-[#1e1e1e] rounded-sm text-center"><iconify-icon icon="lucide:map-pin" width="14" class="text-emerald-400/50"></iconify-icon><p class="text-[8px] text-stone-500 mt-1">Safe Zone density</p></div>
+            <div class="p-2 bg-[#111] border border-[#1e1e1e] rounded-sm text-center"><iconify-icon icon="lucide:sun" width="14" class="text-emerald-400/50"></iconify-icon><p class="text-[8px] text-stone-500 mt-1">Lighting</p></div>
+            <div class="p-2 bg-[#111] border border-[#1e1e1e] rounded-sm text-center"><iconify-icon icon="lucide:users" width="14" class="text-emerald-400/50"></iconify-icon><p class="text-[8px] text-stone-500 mt-1">Volunteers</p></div>
+            <div class="p-2 bg-[#111] border border-[#1e1e1e] rounded-sm text-center"><iconify-icon icon="lucide:alert-triangle" width="14" class="text-emerald-400/50"></iconify-icon><p class="text-[8px] text-stone-500 mt-1">Incidents</p></div>
+            <div class="p-2 bg-[#111] border border-[#1e1e1e] rounded-sm text-center"><iconify-icon icon="lucide:refresh-cw" width="14" class="text-emerald-400/50"></iconify-icon><p class="text-[8px] text-stone-500 mt-1">Dynamic recalc</p></div>
+          </div>
+          <p class="text-[9px] text-stone-600 mt-3 a-fade d6">Emergencies: routes dynamically recalculated to avoid high-risk areas. Works with limited connectivity via cached data.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== F11: PINK MOBILITY ===== -->
+    <div class="frame" id="f11">
+      <div class="w-full h-full flex items-center justify-center bg-[#0a0a0a] p-4 md:p-8">
+        <div class="flex flex-col md:flex-row items-center gap-6 md:gap-10 w-full max-w-4xl">
+          <div class="phone p-3 a-sr">
+            <div class="bg-[#0d0d0d] rounded-lg h-full flex flex-col">
+              <div class="p-2 border-b border-[#1a1a1a]"><p class="text-[8px] text-stone-600 text-center">PINK MOBILITY · LIVE RIDE</p></div>
+              <div class="flex-1 p-2 space-y-2">
+                <div class="flex items-center gap-2 a-chat"><div class="w-8 h-8 rounded-full bg-pink-500/10 border border-pink-500/20 flex items-center justify-center text-xs">👩</div><div><p class="text-[8px] text-stone-300 font-medium">Priya M.</p><p class="text-[7px] text-stone-600">Verified · 4.8★ · 340 trips</p></div></div>
+                <div class="p-2 bg-[#111] border border-[#1a1a1a] rounded a-chat d1"><div class="flex justify-between"><span class="text-[7px] text-stone-500">Route</span><span class="text-[7px] text-emerald-400">On Track</span></div><div class="h-1 bg-[#1a1a1a] rounded-full mt-1"><div class="h-full w-3/5 bg-emerald-500/40 rounded-full"></div></div></div>
+                <div class="p-2 bg-[#111] border border-[#1a1a1a] rounded a-chat d2"><p class="text-[7px] text-stone-500">Safety Score: <span class="text-emerald-400">8.5</span></p><p class="text-[7px] text-stone-500">ETA: <span class="text-stone-300">12 min</span></p></div>
+                <div class="p-2 bg-[#111] border border-[#1a1a1a] rounded a-chat d3"><p class="text-[7px] text-stone-500">Shared with:</p><p class="text-[7px] text-stone-400">📞 Brother + 👩‍💼 Friend Neha</p></div>
+                <div class="mt-1 a-chat d4"><div class="w-full bg-red-500/20 border border-red-500/30 rounded py-1.5 text-center"><span class="text-[8px] text-red-400 font-bold">SOS</span></div></div>
+              </div>
+            </div>
+          </div>
+          <div class="flex-1">
+            <p class="text-[10px] font-bold uppercase tracking-[.2em] text-amber-400/50 mb-3 a-fade">Component 5 — Pink Mobility Services</p>
+            <p class="text-xs text-stone-400 mb-4 a-fade d1">Verified women-led transportation with GPS tracking, SOS integration, and route monitoring.</p>
+            <div class="space-y-2">
+              <div class="flex gap-2 a-sr d2"><iconify-icon icon="lucide:check" width="12" class="text-emerald-400/60 mt-0.5 shrink-0"></iconify-icon><p class="text-[10px] text-stone-400">All drivers are <span class="text-white font-medium">background-verified women</span></p></div>
+              <div class="flex gap-2 a-sr d3"><iconify-icon icon="lucide:check" width="12" class="text-emerald-400/60 mt-0.5 shrink-0"></iconify-icon><p class="text-[10px] text-stone-400">Vehicles GPS-tracked with SOS integration</p></div>
+              <div class="flex gap-2 a-sr d4"><iconify-icon icon="lucide:check" width="12" class="text-emerald-400/60 mt-0.5 shrink-0"></iconify-icon><p class="text-[10px] text-stone-400">Pre-booking for regular commutes (office, college)</p></div>
+              <div class="flex gap-2 a-sr d5"><iconify-icon icon="lucide:check" width="12" class="text-emerald-400/60 mt-0.5 shrink-0"></iconify-icon><p class="text-[10px] text-stone-400">Real-time tracking shared with trusted contacts</p></div>
+              <div class="flex gap-2 a-sr d6"><iconify-icon icon="lucide:check" width="12" class="text-emerald-400/60 mt-0.5 shrink-0"></iconify-icon><p class="text-[10px] text-stone-400">Route monitoring with <span class="text-red-400">deviation alerts</span></p></div>
+              <div class="flex gap-2 a-sr d7"><iconify-icon icon="lucide:check" width="12" class="text-emerald-400/60 mt-0.5 shrink-0"></iconify-icon><p class="text-[10px] text-stone-400">Integrated with Safe Zone network for maximum coverage</p></div>
+            </div>
+            <div class="mt-4 p-3 bg-[#111] border border-[#1e1e1e] rounded-sm a-fade d8">
+              <p class="text-[9px] text-stone-600 uppercase tracking-wider mb-1.5">Ideal for</p>
+              <div class="flex flex-wrap gap-1.5"><span class="text-[8px] text-stone-400 bg-[#1a1a1a] px-2 py-0.5 rounded">Women working late shifts</span><span class="text-[8px] text-stone-400 bg-[#1a1a1a] px-2 py-0.5 rounded">Evening college students</span><span class="text-[8px] text-stone-400 bg-[#1a1a1a] px-2 py-0.5 rounded">Senior citizens</span></div>
+            </div>
+            <p class="text-[9px] text-stone-600 mt-2 a-fade d9">Partnerships with local transport authorities and women self-help groups for fleet expansion.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== F12: FAMILY GUARDIAN ===== -->
+    <div class="frame" id="f12">
+      <div class="w-full h-full flex items-center justify-center bg-[#0a0a0a] p-4 md:p-8">
+        <div class="flex flex-col md:flex-row items-center gap-6 md:gap-10 w-full max-w-4xl">
+          <div class="phone p-3 a-sr">
+            <div class="bg-[#0d0d0d] rounded-lg h-full flex flex-col">
+              <div class="p-2 border-b border-[#1a1a1a]"><p class="text-[8px] text-stone-600 text-center">FAMILY GUARDIAN · AADYA</p></div>
+              <div class="flex-1 p-2 space-y-2">
+                <div class="p-2 bg-emerald-500/5 border border-emerald-500/15 rounded a-chat"><div class="flex justify-between"><span class="text-[7px] text-stone-500">Status</span><span class="text-[7px] text-emerald-400">Walking Home ✓</span></div><div class="h-1.5 bg-[#1a1a1a] rounded-full mt-1.5"><div class="h-full w-4/5 bg-emerald-500/50 rounded-full"></div></div><p class="text-[7px] text-stone-600 mt-1">800m from school → home</p></div>
+                <div class="p-2 bg-[#111] border border-[#1a1a1a] rounded a-chat d2"><p class="text-[7px] text-stone-500">Geofence Zones</p><div class="flex gap-1 mt-1"><span class="text-[7px] bg-blue-500/10 text-blue-400 px-1.5 py-0.5 rounded">🏫 School</span><span class="text-[7px] bg-emerald-500/10 text-emerald-400 px-1.5 py-0.5 rounded">🏠 Home</span><span class="text-[7px] bg-amber-500/10 text-amber-400 px-1.5 py-0.5 rounded">📚 Coaching</span></div></div>
+                <div class="p-2 bg-[#111] border border-[#1a1a1a] rounded a-chat d3"><p class="text-[7px] text-stone-500">Route</p><p class="text-[7px] text-stone-400 mt-0.5">Main road → Park lane → Apt</p><p class="text-[7px] text-emerald-400/50 mt-0.5">No deviations ✓</p></div>
+                <div class="p-2 bg-[#111] border border-[#1a1a1a] rounded a-chat d4"><p class="text-[7px] text-stone-500">Safe Zones on Route</p><p class="text-[7px] text-stone-400 mt-0.5">💊 Pharmacy · 200m</p><p class="text-[7px] text-stone-400">🏥 Clinic · 350m</p><p class="text-[7px] text-stone-400">🏦 Bank · 500m</p><p class="text-[7px] text-stone-400">🛒 Grocery · 650m</p></div>
+                <div class="p-2 bg-red-500/5 border border-red-500/10 rounded a-chat d5"><p class="text-[7px] text-red-400/60">⚠ If 200m+ deviation or 5+ min stop → auto-alert with live location</p></div>
+              </div>
+            </div>
+          </div>
+          <div class="flex-1">
+            <p class="text-[10px] font-bold uppercase tracking-[.2em] text-amber-400/50 mb-3 a-fade">Component 6 — Family Guardian Monitoring</p>
+            <p class="text-xs text-stone-400 mb-4 a-fade d1">Parents and caregivers track dependents in real-time. Designed for children, elderly, and family members with special needs.</p>
+            <div class="space-y-2">
+              <div class="flex gap-2 a-sr d2"><iconify-icon icon="lucide:check" width="12" class="text-emerald-400/60 mt-0.5 shrink-0"></iconify-icon><p class="text-[10px] text-stone-400">Live location tracking on map</p></div>
+              <div class="flex gap-2 a-sr d3"><iconify-icon icon="lucide:check" width="12" class="text-emerald-400/60 mt-0.5 shrink-0"></iconify-icon><p class="text-[10px] text-stone-400">Geofence alerts: home, school, coaching, playground</p></div>
+              <div class="flex gap-2 a-sr d4"><iconify-icon icon="lucide:check" width="12" class="text-emerald-400/60 mt-0.5 shrink-0"></iconify-icon><p class="text-[10px] text-stone-400">Route deviation notifications if path changes unexpectedly</p></div>
+              <div class="flex gap-2 a-sr d5"><iconify-icon icon="lucide:check" width="12" class="text-emerald-400/60 mt-0.5 shrink-0"></iconify-icon><p class="text-[10px] text-stone-400">Safe arrival confirmations when reaching destination</p></div>
+              <div class="flex gap-2 a-sr d6"><iconify-icon icon="lucide:check" width="12" class="text-emerald-400/60 mt-0.5 shrink-0"></iconify-icon><p class="text-[10px] text-stone-400">Scheduled check-in reminders for elderly family members</p></div>
+              <div class="flex gap-2 a-sr d7"><iconify-icon icon="lucide:check" width="12" class="text-emerald-400/60 mt-0.5 shrink-0"></iconify-icon><p class="text-[10px] text-stone-400">Emergency triggers from dependent's device</p></div>
+            </div>
+            <p class="text-[9px] text-stone-600 mt-3 a-fade d8"><span class="text-stone-400">Privacy controls:</span> Dependents manage who can track and when. Not surveillance — supervised safety.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== F13: INCIDENT DOCS & RECOVERY ===== -->
+    <div class="frame" id="f13">
+      <div class="w-full h-full flex items-center justify-center bg-[#0a0a0a] p-4 md:p-8">
+        <div class="w-full max-w-3xl">
+          <p class="text-[10px] font-bold uppercase tracking-[.2em] text-purple-400/50 mb-4 a-fade">Component 7 — Incident Documentation & Recovery</p>
+          <p class="text-xs text-stone-500 mb-5 a-fade d1">Comprehensive assistance beyond the emergency. The step that no other platform provides.</p>
+          <div class="flex items-start gap-3 a-fade d2">
+            <div class="flex flex-col items-center">
+              <div class="w-8 h-8 rounded-full bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-[9px] text-purple-400 font-bold">1</div>
+              <div class="w-px h-8 bg-purple-500/15 mt-1"></div>
+            </div>
+            <div class="pb-4"><p class="text-xs font-medium text-stone-300">Digital Documentation</p><p class="text-[10px] text-stone-500">Timestamp, GPS location, photos, witness statements — all auto-captured</p></div>
+          </div>
+          <div class="flex items-start gap-3 a-fade d3">
+            <div class="flex flex-col items-center">
+              <div class="w-8 h-8 rounded-full bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-[9px] text-purple-400 font-bold">2</div>
+              <div class="w-px h-8 bg-purple-500/15 mt-1"></div>
+            </div>
+            <div class="pb-4"><p class="text-xs font-medium text-stone-300">Auto-Generated Reports</p><p class="text-[10px] text-stone-500">Ready-to-file reports for police and insurance claims</p></div>
+          </div>
+          <div class="flex items-start gap-3 a-fade d4">
+            <div class="flex flex-col items-center">
+              <div class="w-8 h-8 rounded-full bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-[9px] text-purple-400 font-bold">3</div>
+              <div class="w-px h-8 bg-purple-500/15 mt-1"></div>
+            </div>
+            <div class="pb-4"><p class="text-xs font-medium text-stone-300">Legal Assistance</p><p class="text-[10px] text-stone-500">Connections to legal aid services + free legal aid for eligible victims</p></div>
+          </div>
+          <div class="flex items-start gap-3 a-fade d5">
+            <div class="flex flex-col items-center">
+              <div class="w-8 h-8 rounded-full bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-[9px] text-purple-400 font-bold">4</div>
+              <div class="w-px h-8 bg-purple-500/15 mt-1"></div>
+            </div>
+            <div class="pb-4"><p class="text-xs font-medium text-stone-300">Counseling & Mental Health</p><p class="text-[10px] text-stone-500">Service referrals for trauma support and mental health care</p></div>
+          </div>
+          <div class="flex items-start gap-3 a-fade d6">
+            <div class="flex flex-col items-center">
+              <div class="w-8 h-8 rounded-full bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-[9px] text-purple-400 font-bold">5</div>
+              <div class="w-px h-8 bg-purple-500/15 mt-1"></div>
+            </div>
+            <div class="pb-4"><p class="text-xs font-medium text-stone-300">NGO & Helpline Networks</p><p class="text-[10px] text-stone-500">Women's helpline 181, child helpline 1098, partnered NGOs</p></div>
+          </div>
+          <div class="flex items-start gap-3 a-fade d7">
+            <div class="flex flex-col items-center">
+              <div class="w-8 h-8 rounded-full bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-[9px] text-purple-400 font-bold">6</div>
+            </div>
+            <div><p class="text-xs font-medium text-stone-300">Government Scheme Access + Follow-Up</p><p class="text-[10px] text-stone-500">Compensation programs, rehabilitation schemes, sustained recovery tracking</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== F14: POLICE INTEGRATION ===== -->
+    <div class="frame" id="f14">
+      <div class="w-full h-full flex items-center justify-center bg-[#0a0a0a] p-4 md:p-8">
+        <div class="w-full max-w-3xl">
+          <p class="text-[10px] font-bold uppercase tracking-[.2em] text-purple-400/50 mb-4 a-fade">Component 8 — Police Integration</p>
+          <p class="text-xs text-stone-500 mb-5 a-fade d1">Direct connection with police control rooms. <span class="text-stone-300">Not replacing police systems — enhancing them</span> with real-time community intelligence.</p>
+          <div class="grid md:grid-cols-2 gap-3">
+            <div class="p-4 bg-[#111] border border-[#1e1e1e] rounded-sm a-sr d2"><iconify-icon icon="lucide:send" width="18" class="text-purple-400/60 mb-2"></iconify-icon><p class="text-xs font-medium text-stone-300">Automated Incident Reporting</p><p class="text-[10px] text-stone-500 mt-1">Live location + evidence sharing directly to control room</p></div>
+            <div class="p-4 bg-[#111] border border-[#1e1e1e] rounded-sm a-sr d3"><iconify-icon icon="lucide:zap" width="18" class="text-purple-400/60 mb-2"></iconify-icon><p class="text-xs font-medium text-stone-300">Faster Dispatch Coordination</p><p class="text-[10px] text-stone-500 mt-1">Data integration for quicker response deployment</p></div>
+            <div class="p-4 bg-[#111] border border-[#1e1e1e] rounded-sm a-sr d4"><iconify-icon icon="lucide:bar-chart" width="18" class="text-purple-400/60 mb-2"></iconify-icon><p class="text-xs font-medium text-stone-300">Pattern Analysis & Hotspots</p><p class="text-[10px] text-stone-500 mt-1">AI-identified danger zones for police patrol planning</p></div>
+            <div class="p-4 bg-[#111] border border-[#1e1e1e] rounded-sm a-sr d5"><iconify-icon icon="lucide:phone" width="18" class="text-purple-400/60 mb-2"></iconify-icon><p class="text-xs font-medium text-stone-300">Helpline Integration</p><p class="text-[10px] text-stone-500 mt-1">Dial 100, 181 women helpline — all connected</p></div>
+            <div class="p-4 bg-[#111] border border-[#1e1e1e] rounded-sm a-sr d6"><iconify-icon icon="lucide:file-signature" width="18" class="text-purple-400/60 mb-2"></iconify-icon><p class="text-xs font-medium text-stone-300">Digital FIR Assistance</p><p class="text-[10px] text-stone-500 mt-1">Pre-filled documentation support for filing reports</p></div>
+            <div class="p-4 bg-[#111] border border-[#1e1e1e] rounded-sm a-sr d7"><iconify-icon icon="lucide:refresh-cw" width="18" class="text-purple-400/60 mb-2"></iconify-icon><p class="text-xs font-medium text-stone-300">Feedback Loop</p><p class="text-[10px] text-stone-500 mt-1">Improved response times and quality through data</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== F15: USER JOURNEY ===== -->
+    <div class="frame" id="f15">
+      <div class="w-full h-full flex items-center justify-center bg-[#0a0a0a] p-4 md:p-8">
+        <div class="w-full max-w-3xl">
+          <p class="text-[10px] font-bold uppercase tracking-[.2em] text-emerald-400/50 mb-5 a-fade">How It Works — Your Safety Journey</p>
+          <div class="flex items-start gap-4 a-fade d1">
+            <div class="flex flex-col items-center"><div class="w-9 h-9 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-[10px] text-emerald-400 font-bold shrink-0">01</div><div class="w-px h-10 bg-emerald-500/10 mt-1"></div></div>
+            <div class="pb-3"><p class="text-xs font-medium text-stone-300">Onboard</p><p class="text-[10px] text-stone-500">Register, create safety profile, add trusted contacts, set frequent routes, configure emergency preferences, select language</p></div>
+          </div>
+          <div class="flex items-start gap-4 a-fade d2">
+            <div class="flex flex-col items-center"><div class="w-9 h-9 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-[10px] text-emerald-400 font-bold shrink-0">02</div><div class="w-px h-10 bg-emerald-500/10 mt-1"></div></div>
+            <div class="pb-3"><p class="text-xs font-medium text-stone-300">Dashboard</p><p class="text-[10px] text-stone-500">View nearby Safe Zones, check area safety ratings, see emergency contacts, monitor volunteer network, review recent alerts</p></div>
+          </div>
+          <div class="flex items-start gap-4 a-fade d3">
+            <div class="flex flex-col items-center"><div class="w-9 h-9 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-[10px] text-blue-400 font-bold shrink-0">03</div><div class="w-px h-10 bg-blue-500/10 mt-1"></div></div>
+            <div class="pb-3"><p class="text-xs font-medium text-stone-300">Plan & Travel</p><p class="text-[10px] text-stone-500">Get safest route recommendations, view real-time safety scores, activate live tracking, use Pink Mobility</p></div>
+          </div>
+          <div class="flex items-start gap-4 a-fade d4">
+            <div class="flex flex-col items-center"><div class="w-9 h-9 rounded-full bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-[10px] text-amber-400 font-bold shrink-0">04</div><div class="w-px h-10 bg-amber-500/10 mt-1"></div></div>
+            <div class="pb-3"><p class="text-xs font-medium text-stone-300">Emergency</p><p class="text-[10px] text-stone-500">Activate SOS via button/voice/trigger → alerts to contacts + volunteers + police → live location → navigate to Safe Zone → volunteer dispatched</p></div>
+          </div>
+          <div class="flex items-start gap-4 a-fade d5">
+            <div class="flex flex-col items-center"><div class="w-9 h-9 rounded-full bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-[10px] text-purple-400 font-bold shrink-0">05</div></div>
+            <div><p class="text-xs font-medium text-stone-300">Recover</p><p class="text-[10px] text-stone-500">Digital documentation → legal aid → counseling → NGO networks → government schemes → follow-up tracking</p></div>
+          </div>
+          <div class="flex items-center gap-2 mt-4 a-fade d6">
+            <span class="text-[8px] text-emerald-400/40 uppercase tracking-wider bg-emerald-500/5 border border-emerald-500/10 px-2 py-1 rounded">Prevention</span>
+            <iconify-icon icon="lucide:arrow-right" width="10" class="text-stone-700"></iconify-icon>
+            <span class="text-[8px] text-blue-400/40 uppercase tracking-wider bg-blue-500/5 border border-blue-500/10 px-2 py-1 rounded">Protection</span>
+            <iconify-icon icon="lucide:arrow-right" width="10" class="text-stone-700"></iconify-icon>
+            <span class="text-[8px] text-amber-400/40 uppercase tracking-wider bg-amber-500/5 border border-amber-500/10 px-2 py-1 rounded">Response</span>
+            <iconify-icon icon="lucide:arrow-right" width="10" class="text-stone-700"></iconify-icon>
+            <span class="text-[8px] text-purple-400/40 uppercase tracking-wider bg-purple-500/5 border border-purple-500/10 px-2 py-1 rounded">Recovery</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== F16: STORIES 1 ===== -->
+    <div class="frame" id="f16">
+      <div class="w-full h-full flex items-center justify-center bg-[#0a0a0a] p-4 md:p-8">
+        <div class="flex flex-col md:flex-row gap-4 md:gap-6 w-full max-w-4xl">
+          <div class="flex-1 p-4 bg-[#111] border border-[#1e1e1e] rounded-sm a-sr">
+            <div class="flex items-center gap-2 mb-3"><div class="w-7 h-7 rounded-full bg-emerald-500/10 flex items-center justify-center text-xs">👩</div><div><p class="text-[10px] font-medium text-stone-300">Anjali Deshmukh, 27</p><p class="text-[8px] text-stone-600">Working Professional · Nagpur</p></div></div>
+            <p class="text-[10px] text-stone-400 leading-relaxed mb-2">Works at CA firm, finishes after 9 PM. Used to call brother every night during auto ride — stressful for both.</p>
+            <p class="text-[10px] text-stone-400 leading-relaxed mb-2"><span class="text-emerald-400">Safe Route Guidance:</span> Laxmi Nagar road scores 8.2/10 (well-lit, 3 Safe Zones) vs Sitabuldi shortcut at 6.1/10 (poorly lit, no Safe Zones).</p>
+            <p class="text-[10px] text-stone-400 leading-relaxed mb-2"><span class="text-red-400">Route deviation alert</span> triggered when auto took wrong turn — brother notified instantly, nearest 24hr pharmacy Safe Zone highlighted 200m away.</p>
+            <p class="text-[10px] text-emerald-400/70 italic">"Finally feels in control."</p>
+          </div>
+          <div class="flex-1 p-4 bg-[#111] border border-[#1e1e1e] rounded-sm a-sr d3">
+            <div class="flex items-center gap-2 mb-3"><div class="w-7 h-7 rounded-full bg-emerald-500/10 flex items-center justify-center text-xs">👩‍🎓</div><div><p class="text-[10px] font-medium text-stone-300">Roshni Kumari, 19</p><p class="text-[8px] text-stone-600">College Student · Patna</p></div></div>
+            <p class="text-[10px] text-stone-400 leading-relaxed mb-2">Evening coaching at Boring Road ends 7:30 PM, dark by then.</p>
+            <p class="text-[10px] text-stone-400 leading-relaxed mb-2"><span class="text-emerald-400">Night Commute Mode:</span> Main road via Fraser Road scores 7.5/10 (lit, multiple Safe Zones, moderate crowd) vs residential shortcut 3.8/10 (no lights, zero Safe Zones).</p>
+            <p class="text-[10px] text-stone-400 leading-relaxed mb-2"><span class="text-amber-400">AI flagged</span> 2 recent incidents near crossing between 7-9 PM. Chose safer route, activated Companion Share with friend Neha for live tracking.</p>
+            <p class="text-[10px] text-stone-400 leading-relaxed mb-2">Also discovered: tea stall near coaching is a <span class="text-emerald-400">verified Community Safe Zone</span>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== F17: STORIES 2 ===== -->
+    <div class="frame" id="f17">
+      <div class="w-full h-full flex items-center justify-center bg-[#0a0a0a] p-4 md:p-8">
+        <div class="flex flex-col md:flex-row gap-4 md:gap-6 w-full max-w-4xl">
+          <div class="flex-1 p-4 bg-[#111] border border-[#1e1e1e] rounded-sm a-sr">
+            <div class="flex items-center gap-2 mb-3"><div class="w-7 h-7 rounded-full bg-amber-500/10 flex items-center justify-center text-xs">👨‍👩‍👧</div><div><p class="text-[10px] font-medium text-stone-300">Rajesh & Swati Joshi</p><p class="text-[8px] text-stone-600">Parents · Pune</p></div></div>
+            <p class="text-[10px] text-stone-400 leading-relaxed mb-2">Daughter Aadya, 12, walks 800m from school bus to apartment.</p>
+            <p class="text-[10px] text-stone-400 leading-relaxed mb-2"><span class="text-emerald-400">Family Guardian Mode:</span> Notification when bus reaches school → alert when Aadya starts walking → confirmation when entering 100m home geofence.</p>
+            <p class="text-[10px] text-stone-400 leading-relaxed mb-2"><span class="text-amber-400">Route change alert</span> when friend's mother offered a ride — new path shown on Swati's map.</p>
+            <p class="text-[10px] text-stone-400 leading-relaxed mb-2"><span class="text-red-400">If Aadya deviates 200m+ or stops 5+ min</span> → automatic alert with live location.</p>
+            <p class="text-[10px] text-stone-400 leading-relaxed">4 verified Safe Zones on her walking route: pharmacy, bank, clinic, grocery.</p>
+          </div>
+          <div class="flex-1 p-4 bg-[#111] border border-[#1e1e1e] rounded-sm a-sr d3">
+            <div class="flex items-center gap-2 mb-3"><div class="w-7 h-7 rounded-full bg-purple-500/10 flex items-center justify-center text-xs">👵</div><div><p class="text-[10px] font-medium text-stone-300">Savitri Devi, 72</p><p class="text-[8px] text-stone-600">Senior Citizen · Jaipur</p></div></div>
+            <p class="text-[10px] text-stone-400 leading-relaxed mb-2">Lives alone in Malviya Nagar. Son in Bangalore sets up Guardian Connect.</p>
+            <p class="text-[10px] text-stone-400 leading-relaxed mb-2"><span class="text-red-400">SOS when dizzy in park:</span> 2 verified Community Volunteers reached in <span class="text-emerald-400 font-medium">90 seconds</span> — Mrs. Gupta (adjacent building) and Mr. Sharma (retired army officer).</p>
+            <p class="text-[10px] text-stone-400 leading-relaxed mb-2">Son alerted with live coordinates. Nearest Safe Zone nursing home (400m) highlighted. Volunteers helped her reach it.</p>
+            <p class="text-[10px] text-stone-400 leading-relaxed mb-2"><span class="text-purple-400">Post-incident Recovery:</span> Connected with free counseling, helped file incident report for medical records.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== F18: VS COMPETITORS ===== -->
+    <div class="frame" id="f18">
+      <div class="w-full h-full flex items-center justify-center bg-[#0a0a0a] p-4 md:p-8">
+        <div class="w-full max-w-3xl">
+          <p class="text-[10px] font-bold uppercase tracking-[.2em] text-emerald-400/50 mb-4 a-fade">How Suraksha Setu Compares</p>
+          <div class="overflow-x-auto a-fade d1">
+            <table class="w-full min-w-[600px] text-[10px]">
+              <thead><tr class="border-b border-[#222]"><th class="text-left py-2.5 pr-3 text-stone-600 font-medium w-1/4">Feature</th><th class="text-left py-2.5 px-2 text-stone-600 font-medium">SOS Apps</th><th class="text-left py-2.5 px-2 text-stone-600 font-medium">Safety Maps</th><th class="text-left py-2.5 px-2 text-stone-600 font-medium">CCTV Nets</th><th class="text-left py-2.5 pl-2 text-emerald-400/70 font-medium">Suraksha Setu</th></tr></thead>
+              <tbody class="text-stone-400">
+                <tr class="border-b border-[#151515]"><td class="py-2 pr-3 text-stone-500">AI Risk Scoring</td><td class="py-2 px-2 text-stone-700">—</td><td class="py-2 px-2 text-stone-700">—</td><td class="py-2 px-2 text-stone-700">—</td><td class="py-2 pl-2 text-emerald-400">✓ 8-factor real-time</td></tr>
+                <tr class="border-b border-[#151515]"><td class="py-2 pr-3 text-stone-500">Preventive Intelligence</td><td class="py-2 px-2 text-stone-700">—</td><td class="py-2 px-2 text-stone-700">—</td><td class="py-2 px-2 text-stone-700">—</td><td class="py-2 pl-2 text-emerald-400">✓ Predicts, not reacts</td></tr>
+                <tr class="border-b border-[#151515]"><td class="py-2 pr-3 text-stone-500">Safe Route Guidance</td><td class="py-2 px-2 text-stone-700">—</td><td class="py-2 px-2 text-stone-700">Partial</td><td class="py-2 px-2 text-stone-700">—</td><td class="py-2 pl-2 text-emerald-400">✓ AI-calculated safest</td></tr>
+                <tr class="border-b border-[#151515]"><td class="py-2 pr-3 text-stone-500">Community Volunteers</td><td class="py-2 px-2 text-stone-700">—</td><td class="py-2 px-2 text-stone-700">—</td><td class="py-2 px-2 text-stone-700">—</td><td class="py-2 pl-2 text-emerald-400">✓ &lt;3 min response</td></tr>
+                <tr class="border-b border-[#151515]"><td class="py-2 pr-3 text-stone-500">Family Monitoring</td><td class="py-2 px-2 text-stone-700">—</td><td class="py-2 px-2 text-stone-700">—</td><td class="py-2 px-2 text-stone-700">—</td><td class="py-2 pl-2 text-emerald-400">✓ Geofence + deviation</td></tr>
+                <tr class="border-b border-[#151515]"><td class="py-2 pr-3 text-stone-500">Pink Mobility</td><td class="py-2 px-2 text-stone-700">—</td><td class="py-2 px-2 text-stone-700">—</td><td class="py-2 px-2 text-stone-700">—</td><td class="py-2 pl-2 text-emerald-400">✓ Women-led transport</td></tr>
+                <tr class="border-b border-[#151515]"><td class="py-2 pr-3 text-stone-500">Recovery Support</td><td class="py-2 px-2 text-stone-700">—</td><td class="py-2 px-2 text-stone-700">—</td><td class="py-2 px-2 text-stone-700">—</td><td class="py-2 pl-2 text-emerald-400">✓ Legal + counseling + schemes</td></tr>
+                <tr><td class="py-2 pr-3 text-stone-500">Police Integration</td><td class="py-2 px-2 text-stone-700">—</td><td class="py-2 px-2 text-stone-700">—</td><td class="py-2 px-2 text-stone-700">Siloed</td><td class="py-2 pl-2 text-emerald-400">✓ Control room + FIR</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="text-[9px] text-stone-600 mt-3 a-fade d3">The ONLY platform covering the complete safety lifecycle from prevention to recovery.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== F19: PARTNERSHIPS ===== -->
+    <div class="frame" id="f19">
+      <div class="w-full h-full flex items-center justify-center bg-[#0a0a0a] p-4 md:p-8">
+        <div class="w-full max-w-3xl">
+          <p class="text-[10px] font-bold uppercase tracking-[.2em] text-emerald-400/50 mb-4 a-fade">Strategic Partnerships for Safety at Scale</p>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="a-sr">
+              <p class="text-[9px] font-bold uppercase tracking-widest text-stone-600 mb-3">Government Partners</p>
+              <div class="space-y-2">
+                <div class="flex items-center gap-2 p-2 bg-[#111] border border-[#1e1e1e] rounded-sm"><iconify-icon icon="lucide:landmark" width="14" class="text-stone-500"></iconify-icon><div><p class="text-[10px] text-stone-300">Ministry of Women & Child Development</p><p class="text-[8px] text-stone-600">Policy alignment, welfare integration</p></div></div>
+                <div class="flex items-center gap-2 p-2 bg-[#111] border border-[#1e1e1e] rounded-sm"><iconify-icon icon="lucide:shield" width="14" class="text-stone-500"></iconify-icon><div><p class="text-[10px] text-stone-300">Police Departments & Emergency Services</p><p class="text-[8px] text-stone-600">Control room, dispatch, data sharing</p></div></div>
+                <div class="flex items-center gap-2 p-2 bg-[#111] border border-[#1e1e1e] rounded-sm"><iconify-icon icon="lucide:building" width="14" class="text-stone-500"></iconify-icon><div><p class="text-[10px] text-stone-300">Smart Cities Mission</p><p class="text-[8px] text-stone-600">CCTV, smart lighting, command centers</p></div></div>
+                <div class="flex items-center gap-2 p-2 bg-[#111] border border-[#1e1e1e] rounded-sm"><iconify-icon icon="lucide:map" width="14" class="text-stone-500"></iconify-icon><div><p class="text-[10px] text-stone-300">State Governments & Municipal Corps</p><p class="text-[8px] text-stone-600">Local implementation, Safe Zone verification</p></div></div>
+                <div class="flex items-center gap-2 p-2 bg-[#111] border border-[#1e1e1e] rounded-sm"><iconify-icon icon="lucide:graduation-cap" width="14" class="text-stone-500"></iconify-icon><div><p class="text-[10px] text-stone-300">Education Departments</p><p class="text-[8px] text-stone-600">School commute safety, campus zones</p></div></div>
+              </div>
+            </div>
+            <div class="a-sr d3">
+              <p class="text-[9px] font-bold uppercase tracking-widest text-stone-600 mb-3">Community & Private Partners</p>
+              <div class="space-y-2">
+                <div class="flex items-center gap-2 p-2 bg-[#111] border border-[#1e1e1e] rounded-sm"><iconify-icon icon="lucide:store" width="14" class="text-stone-500"></iconify-icon><div><p class="text-[10px] text-stone-300">Local Businesses</p><p class="text-[8px] text-stone-600">Safe Zone hosting, employee volunteers</p></div></div>
+                <div class="flex items-center gap-2 p-2 bg-[#111] border border-[#1e1e1e] rounded-sm"><iconify-icon icon="lucide:hospital" width="14" class="text-stone-500"></iconify-icon><div><p class="text-[10px] text-stone-300">Hospitals & Pharmacies</p><p class="text-[8px] text-stone-600">Verified Safe Zones, emergency medical</p></div></div>
+                <div class="flex items-center gap-2 p-2 bg-[#111] border border-[#1e1e1e] rounded-sm"><iconify-icon icon="lucide:school" width="14" class="text-stone-500"></iconify-icon><div><p class="text-[10px] text-stone-300">Educational Institutions</p><p class="text-[8px] text-stone-600">Campus safety, student commute monitoring</p></div></div>
+                <div class="flex items-center gap-2 p-2 bg-[#111] border border-[#1e1e1e] rounded-sm"><iconify-icon icon="lucide:heart-handshake" width="14" class="text-stone-500"></iconify-icon><div><p class="text-[10px] text-stone-300">NGOs & Social Organizations</p><p class="text-[8px] text-stone-600">Counseling, legal aid, rehabilitation</p></div></div>
+                <div class="flex items-center gap-2 p-2 bg-[#111] border border-[#1e1e1e] rounded-sm"><iconify-icon icon="lucide:car" width="14" class="text-stone-500"></iconify-icon><div><p class="text-[10px] text-stone-300">Transport Authorities</p><p class="text-[8px] text-stone-600">Pink Mobility, women driver programs</p></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== F20: IMPACT + BUDGET + ROADMAP ===== -->
+    <div class="frame" id="f20">
+      <div class="w-full h-full flex items-center justify-center bg-[#0a0a0a] p-4 md:p-8">
+        <div class="w-full max-w-4xl">
+          <!-- Impact -->
+          <p class="text-[10px] font-bold uppercase tracking-[.2em] text-emerald-400/50 mb-3 a-fade">Impact Targets</p>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-2 mb-5">
+            <div class="p-3 bg-[#111] border border-[#1e1e1e] rounded-sm text-center a-count"><p class="serif text-2xl md:text-3xl text-emerald-400">50%</p><p class="text-[8px] text-stone-500 mt-1">Reduction in unsafe route usage within 12 months</p></div>
+            <div class="p-3 bg-[#111] border border-[#1e1e1e] rounded-sm text-center a-count d1"><p class="serif text-2xl md:text-3xl text-emerald-400">&lt;3min</p><p class="text-[8px] text-stone-500 mt-1">Average volunteer response time</p></div>
+            <div class="p-3 bg-[#111] border border-[#1e1e1e] rounded-sm text-center a-count d2"><p class="serif text-2xl md:text-3xl text-emerald-400">10K+</p><p class="text-[8px] text-stone-500 mt-1">Verified volunteers in pilot cities, Year 1</p></div>
+            <div class="p-3 bg-[#111] border border-[#1e1e1e] rounded-sm text-center a-count d3"><p class="serif text-2xl md:text-3xl text-emerald-400">80%</p><p class="text-[8px] text-stone-500 mt-1">Parents report improved peace of mind</p></div>
+          </div>
+          <!-- Budget -->
+          <p class="text-[9px] font-bold uppercase tracking-widest text-stone-600 mb-2 a-fade d4">Budget Allocation</p>
+          <div class="flex h-5 rounded-sm overflow-hidden mb-1 a-fade d5">
+            <div class="bg-emerald-500/40 a-bar" style="--w:10%" title="Research 10%"></div>
+            <div class="bg-emerald-500/50 a-bar" style="--w:13%;animation-delay:.1s" title="Design 13%"></div>
+            <div class="bg-emerald-500/70 a-bar" style="--w:32%;animation-delay:.2s" title="Development 32%"></div>
+            <div class="bg-emerald-500/50 a-bar" style="--w:15%;animation-delay:.3s" title="Infrastructure 15%"></div>
+            <div class="bg-emerald-500/40 a-bar" style="--w:8%;animation-delay:.4s" title="Testing 8%"></div>
+            <div class="bg-emerald-500/50 a-bar" style="--w:10%;animation-delay:.5s" title="Deploy 10%"></div>
+            <div class="bg-emerald-500/30 a-bar" style="--w:7%;animation-delay:.6s" title="Support 7%"></div>
+            <div class="bg-emerald-500/20 a-bar" style="--w:5%;animation-delay:.7s" title="Contingency 5%"></div>
+          </div>
+          <div class="flex flex-wrap gap-x-3 gap-y-0.5 text-[7px] text-stone-600 mb-5 a-fade d5">
+            <span>Research 10%</span><span>Design 13%</span><span>Dev 32%</span><span>Infra 15%</span><span>Test 8%</span><span>Deploy 10%</span><span>Support 7%</span><span>Contingency 5%</span>
+          </div>
+          <!-- Roadmap -->
+          <p class="text-[9px] font-bold uppercase tracking-widest text-stone-600 mb-2 a-fade d6">Implementation Roadmap</p>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-2 a-fade d7">
+            <div class="p-2.5 bg-[#111] border border-[#1e1e1e] rounded-sm"><p class="text-[8px] text-emerald-400/60 font-bold">0–6 MONTHS</p><p class="text-[10px] text-stone-300 mt-0.5">Foundation</p><p class="text-[8px] text-stone-600 mt-0.5">Research, AI dev, stakeholder mapping, MVP design</p></div>
+            <div class="p-2.5 bg-[#111] border border-emerald-500/15 rounded-sm"><p class="text-[8px] text-emerald-400/60 font-bold">6–12 MONTHS</p><p class="text-[10px] text-stone-300 mt-0.5">Pilot</p><p class="text-[8px] text-stone-600 mt-0.5">2 cities, 1K+ Safe Zones, 500+ volunteers, 10K users</p></div>
+            <div class="p-2.5 bg-[#111] border border-[#1e1e1e] rounded-sm"><p class="text-[8px] text-emerald-400/60 font-bold">12–24 MONTHS</p><p class="text-[10px] text-stone-300 mt-0.5">Scale</p><p class="text-[8px] text-stone-600 mt-0.5">10 cities, Pink Mobility, 50K+ volunteers, state govts</p></div>
+            <div class="p-2.5 bg-[#111] border border-[#1e1e1e] rounded-sm"><p class="text-[8px] text-emerald-400/60 font-bold">24–36 MONTHS</p><p class="text-[10px] text-stone-300 mt-0.5">National</p><p class="text-[8px] text-stone-600 mt-0.5">Pan-India, smart city integration, 500K+ users</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== F21: CTA ===== -->
+    <div class="frame" id="f21">
+      <div class="w-full h-full flex flex-col items-center justify-center bg-[#0a0a0a] p-6">
+        <div class="w-16 h-16 rounded-full bg-emerald-500/10 border-2 border-emerald-500/30 flex items-center justify-center mb-5 a-fade a-glow"><iconify-icon icon="lucide:shield-check" width="28" class="text-emerald-400"></iconify-icon></div>
+        <p class="serif text-xl md:text-2xl text-white/80 text-center max-w-md leading-relaxed a-fade d1">"Safety is not just about responding to emergencies — it is about preventing them, building community resilience, and ensuring every woman and child can walk without fear."</p>
+        <p class="text-xs text-emerald-400/50 mt-3 a-fade d2">— Suraksha Setu Vision</p>
+        <div class="flex items-center gap-3 mt-8 a-fade d3">
+          <span class="text-[10px] font-bold uppercase tracking-widest text-[#DADFDB] bg-[#383B26] px-5 py-2.5 rounded-sm">Partner With Us</span>
+          <span class="text-[10px] font-bold uppercase tracking-widest text-[#DADFDB] bg-[#383B26] px-5 py-2.5 rounded-sm">Invest In Safety</span>
+          <span class="text-[10px] font-bold uppercase tracking-widest text-[#DADFDB] bg-[#383B26] px-5 py-2.5 rounded-sm">Volunteer</span>
+        </div>
+        <div class="flex items-center gap-2 mt-8 a-fade d4">
+          <p class="text-xs text-stone-500">Presented by</p>
+          <p class="text-xs text-stone-300 font-medium">Amruta Fadnavis</p>
+        </div>
+        <p class="text-[10px] text-stone-700 mt-1 a-fade d5">Every neighborhood deserves to be safe. Every woman deserves to walk without fear.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- NAV -->
+  <div class="flex items-center justify-between mt-3">
+    <button id="pbtn" class="nb flex items-center gap-1.5 text-[11px] text-stone-400 border border-[#222] px-3 py-1.5 rounded-sm" disabled><iconify-icon icon="lucide:arrow-left" width="13"></iconify-icon>Prev</button>
+    <div class="flex items-center gap-2">
+      <span id="ctr" class="text-[11px] text-stone-600 font-mono mr-2">01/21</span>
+      <div id="tl" class="hidden md:flex items-center gap-1"></div>
+    </div>
+    <button id="nbtn" class="nb flex items-center gap-1.5 text-[11px] text-stone-400 border border-[#222] px-3 py-1.5 rounded-sm">Next<iconify-icon icon="lucide:arrow-right" width="13"></iconify-icon></button>
+  </div>
+</div>
+
+<!-- NOTES -->
+<div class="max-w-6xl mx-auto px-4 md:px-6 pb-6">
+  <div class="bg-[#111] border border-[#1a1a1a] rounded-sm p-4">
+    <div class="flex items-start gap-2.5">
+      <iconify-icon icon="lucide:info" width="14" class="text-emerald-400/40 mt-0.5 shrink-0"></iconify-icon>
+      <div><p class="text-[9px] font-bold uppercase tracking-widest text-emerald-400/40 mb-1">Frame Note</p><p id="nt" class="text-[11px] text-stone-500 leading-relaxed">Four problem statistics appear one by one with count-up animations. Red color creates tension. The "0 platforms" at the end is the hook — it establishes that nothing like this exists. No voiceover yet — just ambient sound and numbers landing.</p></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const T=21;let c=1;
+const N=["Four problem statistics appear one by one with count-up animations. Red color creates tension. The '0 platforms' at the end is the hook — it establishes that nothing like this exists. No voiceover yet — just ambient sound and numbers landing.","All six challenges listed with numbered cards. Each explains not just what's missing but WHY it matters (e.g., 'every second counts'). This frame ensures the client understands the depth of the problem before seeing any solution.","Four convergence data points. This answers the client's unspoken question: 'Why now? Why not 5 years ago?' Each stat is from a real initiative — Digital India, Smart Cities — giving institutional credibility.","Six specific gaps framed with X marks. Each gap directly corresponds to a Suraksha Setu component (previewed without naming them). The client starts mentally connecting: 'Oh, so THAT's what solves THIS.'","Title card. Green glow on the shield. Four lifecycle stages appear underneath — this immediately signals: this is NOT just another SOS app. It's a full-lifecycle system. The tagline anchors the emotional promise.","All 8 components in a 4×2 grid, color-coded by lifecycle stage (green=prevention, blue=protection, amber=response, purple=recovery). Each card has a one-line description. The bottom bar reinforces the 4-stage flow. Client can now see the full architecture at a glance.","Phone mockup showing the actual map screen a user would see. Green dots light up one by one — hospitals, pharmacies, police, schools, stores, security offices, community centers. Right side lists all 7 Safe Zone types with icons. This makes the abstract concept of 'Safe Zones' feel tangible and real.","The 8 AI scoring factors in a 4×2 grid — location, time, crowd, lighting, weather, history, alerts, community. Below: a gradient bar showing the 0-10 scale with the current score (8.2) animated. This is the 'science' frame — it shows the AI isn't magic, it's systematic.","Phone mockup showing the VOLUNTEER ALERT screen — what a volunteer sees when SOS is triggered. Shows: victim info, distance, accept/decline buttons, nearby Safe Zone, other responders. Right side lists all 6 volunteer network features. The client can now imagine BEING a volunteer.","The signature visual — 6.1 vs 8.2 route comparison. Left: red, dashed, jagged path with negative tags. Right: green, solid, straight path with Safe Zone dots and positive tags. Below: 6 routing factors in small cards. This single frame explains the core AI value proposition better than any paragraph.","Phone mockup showing a live Pink Mobility ride — driver info, route progress bar, safety score, shared contacts, SOS button. Right side lists all 6 service features plus 'Ideal for' tags. The client sees this isn't just an idea — it's a designed product with real screens.","Phone mockup showing Family Guardian tracking Aadya's walk home — progress bar, geofence zones, route details, Safe Zones on route, deviation alert threshold. Right side lists all 6 features plus the privacy control note. Parents in the audience connect immediately.","The recovery chain as a vertical step-by-step flow: Digital Docs → Auto-Reports → Legal Aid → Counseling → NGO Networks → Govt Schemes. This is the 'beyond emergency' frame — it's what separates Suraksha Setu from every competitor. Most clients won't expect this component.","Six police integration capabilities in a 3×2 grid. The key line: 'Not replacing police systems — enhancing them.' This is critical for government clients who might feel threatened. Each card shows a specific integration point with an icon.","The 5-step user journey as a vertical timeline: Onboard → Dashboard → Plan & Travel → Emergency → Recover. Each step has a detailed description. Bottom bar shows the lifecycle stages color-coded. This is the 'how do I use it?' frame — it makes the system feel learnable.","Two real user stories side by side. Anjali (working professional) — route scoring, deviation alert, Safe Zone. Roshni (student) — night commute mode, AI-flagged incidents, companion share. These are NOT hypothetical — they're detailed enough to feel real. Government clients imagine their own citizens in these stories.","Two more stories. Joshi family — the parent perspective with Family Guardian details. Savitri Devi — senior citizen SOS with 90-second volunteer response and post-incident recovery. Four stories across four demographics: professional, student, parent, senior. Complete coverage.","Direct comparison table: Suraksha Setu vs SOS Apps vs Safety Maps vs CCTV Networks across 8 features. Every cell in the competitor columns is '—' or 'Partial' or 'Siloed.' Every cell in Suraksha's column is a green checkmark with a specific capability. This is the 'kill sheet' frame.","Two-column partnership layout. Government: WCD, Police, Smart Cities, State Govts, Education. Private: Businesses, Hospitals, Institutions, NGOs, Transport. Each with a one-line description of what they bring. This shows the client they're joining an ecosystem, not funding a standalone app.","Three sections stacked: Impact metrics (4 big numbers), Budget allocation (animated segmented bar with 8 categories), Roadmap (4-phase grid with specific targets per phase). This is the 'execution credibility' frame — it proves this is a real plan with real numbers, not just a concept.","Closing quote from the vision statement. Three CTA buttons: Partner, Invest, Volunteer. Amruta Fadnavis credit. The quote reframes safety from 'responding to emergencies' to 'preventing them' — leaving the client with the expanded mindset the entire demo built toward."];
+
+const tl=document.getElementById('tl');
+for(let i=1;i<=T;i++){const d=document.createElement('button');d.className='td w-1.5 h-1.5 rounded-full bg-[#222]';d.onclick=()=>go(i);tl.appendChild(d)}
+
+function go(n){
+  document.getElementById('f'+c).classList.remove('active');
+  c=n;const f=document.getElementById('f'+c);
+  void f.offsetWidth;f.classList.add('active');
+  document.getElementById('ctr').textContent=String(c).padStart(2,'0')+'/'+String(T).padStart(2,'0');
+  document.getElementById('pbtn').disabled=c===1;
+  document.getElementById('nbtn').disabled=c===T;
+  document.querySelectorAll('.td').forEach((d,i)=>{d.classList.remove('on','done');if(i+1===c)d.classList.add('on');else if(i+1<c)d.classList.add('done')});
+  document.getElementById('nt').textContent=N[c-1];
+}
+document.getElementById('pbtn').onclick=()=>{if(c>1)go(c-1)};
+document.getElementById('nbtn').onclick=()=>{if(c<T)go(c+1)};
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'&&c<T)go(c+1);if(e.key==='ArrowLeft'&&c>1)go(c-1)});
+</script>
+</body>
+</html>
