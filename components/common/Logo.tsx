@@ -18,7 +18,7 @@ export default function Logo() {
             {/* Logo */}
             <div className="relative overflow-hidden rounded-xl transition-transform duration-500 group-hover:scale-105">
                 <Image
-                    src="/logo/nivaranlogo.png"
+                    src="/logo/nivaran-logo.png"
                     alt="Nivaran Technologies"
                     width={100}
                     height={100}
